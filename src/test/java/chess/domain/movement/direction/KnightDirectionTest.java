@@ -1,37 +1,51 @@
 package chess.domain.movement.direction;
 
+import static chess.domain.Fixtures.B3;
+import static chess.domain.Fixtures.B5;
+import static chess.domain.Fixtures.C2;
+import static chess.domain.Fixtures.C6;
+import static chess.domain.Fixtures.D4;
+import static chess.domain.Fixtures.E2;
+import static chess.domain.Fixtures.E6;
+import static chess.domain.Fixtures.F3;
+import static chess.domain.Fixtures.F5;
+import static chess.domain.Fixtures.H8;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import chess.domain.position.Position;
 import java.util.List;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class KnightDirectionTest {
 
-    @ParameterizedTest
-    @CsvSource({"5,6", "5,2", "3,6", "3,2", "6,5", "6,3", "2,5", "2,3"})
-    @DisplayName("도착 위치로 이동이 가능할 경우 참을 반환한다.")
-    void Given_KnightDirection_When_CanReachWithReachablePosition_Then_True(int file, int rank) {
-        //given
-        KnightDirection direction = new KnightDirection();
-        Position source = new Position(4, 4);
-        Position target = new Position(file, rank);
-        //when, then
-        assertThat(direction.canReach(source, target, List.of())).isTrue();
+    private static final Position SOURCE = D4;
+
+    static Stream<Position> possibleTarget() {
+        return Stream.of(
+                E6, E2, C6, C2, F5, F3, B5, B3
+        );
     }
 
-    @Test
+    @ParameterizedTest
+    @MethodSource("possibleTarget")
+    @DisplayName("도착 위치로 이동이 가능할 경우 참을 반환한다.")
+    void Given_KnightDirection_When_CanReachWithReachablePosition_Then_True(Position target) {
+        //given
+        KnightDirection direction = new KnightDirection();
+        //when, then
+        assertThat(direction.canReach(SOURCE, target, List.of())).isTrue();
+    }
+
     @DisplayName("도착 위치에 장애물이 있을 경우 거짓을 반환한다.")
     void Given_KnightDirection_When_CanReachWithReachablePositionAndObstacle_Then_False() {
         //given
         KnightDirection direction = new KnightDirection();
-        Position source = new Position(4, 4);
-        Position target = new Position(2, 5);
         //when, then
-        assertThat(direction.canReach(source, target, List.of(new Position(2, 5)))).isFalse();
+        assertThat(direction.canReach(SOURCE, B5, List.of(B5))).isFalse();
     }
 
     @Test
@@ -39,9 +53,7 @@ class KnightDirectionTest {
     void Given_KnightDirection_When_canReachWithUnreachablePosition_Then_False() {
         //given
         KnightDirection direction = new KnightDirection();
-        Position source = new Position(2, 7);
-        Position target = new Position(8, 8);
         //when, then
-        assertThat(direction.canReach(source, target, List.of())).isFalse();
+        assertThat(direction.canReach(SOURCE, H8, List.of())).isFalse();
     }
 }

@@ -2,13 +2,14 @@ package chess.domain.piece;
 
 import chess.domain.movement.Movement;
 import chess.domain.position.Position;
+import chess.domain.position.Rank;
 import java.util.Map;
 import java.util.Map.Entry;
 
 public class Pawn extends Piece {
 
-    private static final int WHITE_PAWN_FIRST_RANK = 2;
-    private static final int BLACK_PAWN_FIRST_RANK = 7;
+    private static final Rank WHITE_PAWN_FIRST_RANK = Rank.TWO;
+    private static final Rank BLACK_PAWN_FIRST_RANK = Rank.SEVEN;
 
     public Pawn(Color color) {
         super(PieceType.PAWN, color);

@@ -1,8 +1,12 @@
 package chess.domain.movement.direction;
 
+import static chess.domain.Fixtures.A1;
+import static chess.domain.Fixtures.F1;
+import static chess.domain.Fixtures.G1;
+import static chess.domain.Fixtures.H1;
+import static chess.domain.Fixtures.H8;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import chess.domain.position.Position;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,10 +18,8 @@ class LeftDirectionTest {
     void Given_LeftDirection_When_CanReachWithReachablePosition_Then_True() {
         //given
         LeftDirection direction = new LeftDirection(8);
-        Position source = new Position(8, 1);
-        Position target = new Position(6, 1);
         //when, then
-        assertThat(direction.canReach(source, target, List.of())).isTrue();
+        assertThat(direction.canReach(H1, A1, List.of())).isTrue();
     }
 
     @Test
@@ -25,10 +27,8 @@ class LeftDirectionTest {
     void Given_LeftDirection_When_CanReachWithUnreachablePosition_Then_False() {
         //given
         LeftDirection direction = new LeftDirection(8);
-        Position source = new Position(1, 1);
-        Position target = new Position(1, 7);
         //when, then
-        assertThat(direction.canReach(source, target, List.of())).isFalse();
+        assertThat(direction.canReach(H1, H8, List.of())).isFalse();
     }
 
     @Test
@@ -36,10 +36,8 @@ class LeftDirectionTest {
     void Given_LeftDirection_When_CanReachWithReachablePositionAndObstacle_Then_False() {
         //given
         LeftDirection direction = new LeftDirection(8);
-        Position source = new Position(8, 1);
-        Position target = new Position(6, 1);
         //when, then
-        assertThat(direction.canReach(source, target, List.of(new Position(7, 1)))).isFalse();
+        assertThat(direction.canReach(H1, F1, List.of(G1))).isFalse();
     }
 
     @Test
@@ -47,9 +45,7 @@ class LeftDirectionTest {
     void Given_LeftDirection_When_CanReachWithUnreachableMoveCount_Then_False() {
         //given
         LeftDirection direction = new LeftDirection(1);
-        Position source = new Position(8, 1);
-        Position target = new Position(6, 1);
         //when, then
-        assertThat(direction.canReach(source, target, List.of())).isFalse();
+        assertThat(direction.canReach(H1, F1, List.of())).isFalse();
     }
 }

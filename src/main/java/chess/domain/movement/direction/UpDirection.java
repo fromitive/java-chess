@@ -13,6 +13,6 @@ public class UpDirection extends StraightDirection {
         if (position.isMaximumRank()) {
             return position;
         }
-        return new Position(position.file(), position.rank() + 1);
+        return new Position(position.file(), position.rank().move(1));
     }
 }

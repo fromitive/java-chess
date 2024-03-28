@@ -12,9 +12,12 @@ import chess.domain.piece.Pawn;
 import chess.domain.piece.Piece;
 import chess.domain.piece.Queen;
 import chess.domain.piece.Rook;
+import chess.domain.position.File;
 import chess.domain.position.Position;
+import chess.domain.position.Rank;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
-import java.util.stream.IntStream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -30,47 +33,47 @@ class BoardFactoryTest {
         assertAll(
                 () -> assertThat(initialPiecePositions)
                         .containsAllEntriesOf(Map.of(
-                                new Position(1, 1), new Rook(Color.WHITE),
-                                new Position(2, 1), new Knight(Color.WHITE),
-                                new Position(3, 1), new Bishop(Color.WHITE),
-                                new Position(4, 1), new Queen(Color.WHITE),
-                                new Position(5, 1), new King(Color.WHITE),
-                                new Position(6, 1), new Bishop(Color.WHITE),
-                                new Position(7, 1), new Knight(Color.WHITE),
-                                new Position(8, 1), new Rook(Color.WHITE)
+                                new Position(File.A, Rank.ONE), new Rook(Color.WHITE),
+                                new Position(File.B, Rank.ONE), new Knight(Color.WHITE),
+                                new Position(File.C, Rank.ONE), new Bishop(Color.WHITE),
+                                new Position(File.D, Rank.ONE), new Queen(Color.WHITE),
+                                new Position(File.E, Rank.ONE), new King(Color.WHITE),
+                                new Position(File.F, Rank.ONE), new Bishop(Color.WHITE),
+                                new Position(File.G, Rank.ONE), new Knight(Color.WHITE),
+                                new Position(File.H, Rank.ONE), new Rook(Color.WHITE)
                         )),
                 () -> assertThat(initialPiecePositions)
                         .containsAllEntriesOf(Map.of(
-                                new Position(1, 2), new Pawn(Color.WHITE),
-                                new Position(2, 2), new Pawn(Color.WHITE),
-                                new Position(3, 2), new Pawn(Color.WHITE),
-                                new Position(4, 2), new Pawn(Color.WHITE),
-                                new Position(5, 2), new Pawn(Color.WHITE),
-                                new Position(6, 2), new Pawn(Color.WHITE),
-                                new Position(7, 2), new Pawn(Color.WHITE),
-                                new Position(8, 2), new Pawn(Color.WHITE)
+                                new Position(File.A, Rank.TWO), new Pawn(Color.WHITE),
+                                new Position(File.B, Rank.TWO), new Pawn(Color.WHITE),
+                                new Position(File.C, Rank.TWO), new Pawn(Color.WHITE),
+                                new Position(File.D, Rank.TWO), new Pawn(Color.WHITE),
+                                new Position(File.E, Rank.TWO), new Pawn(Color.WHITE),
+                                new Position(File.F, Rank.TWO), new Pawn(Color.WHITE),
+                                new Position(File.G, Rank.TWO), new Pawn(Color.WHITE),
+                                new Position(File.H, Rank.TWO), new Pawn(Color.WHITE)
                         )),
                 () -> assertThat(initialPiecePositions)
                         .containsAllEntriesOf(Map.of(
-                                new Position(1, 7), new Pawn(Color.BLACK),
-                                new Position(2, 7), new Pawn(Color.BLACK),
-                                new Position(3, 7), new Pawn(Color.BLACK),
-                                new Position(4, 7), new Pawn(Color.BLACK),
-                                new Position(5, 7), new Pawn(Color.BLACK),
-                                new Position(6, 7), new Pawn(Color.BLACK),
-                                new Position(7, 7), new Pawn(Color.BLACK),
-                                new Position(8, 7), new Pawn(Color.BLACK)
+                                new Position(File.A, Rank.SEVEN), new Pawn(Color.BLACK),
+                                new Position(File.B, Rank.SEVEN), new Pawn(Color.BLACK),
+                                new Position(File.C, Rank.SEVEN), new Pawn(Color.BLACK),
+                                new Position(File.D, Rank.SEVEN), new Pawn(Color.BLACK),
+                                new Position(File.E, Rank.SEVEN), new Pawn(Color.BLACK),
+                                new Position(File.F, Rank.SEVEN), new Pawn(Color.BLACK),
+                                new Position(File.G, Rank.SEVEN), new Pawn(Color.BLACK),
+                                new Position(File.H, Rank.SEVEN), new Pawn(Color.BLACK)
                         )),
                 () -> assertThat(initialPiecePositions)
                         .containsAllEntriesOf(Map.of(
-                                new Position(1, 8), new Rook(Color.BLACK),
-                                new Position(2, 8), new Knight(Color.BLACK),
-                                new Position(3, 8), new Bishop(Color.BLACK),
-                                new Position(4, 8), new Queen(Color.BLACK),
-                                new Position(5, 8), new King(Color.BLACK),
-                                new Position(6, 8), new Bishop(Color.BLACK),
-                                new Position(7, 8), new Knight(Color.BLACK),
-                                new Position(8, 8), new Rook(Color.BLACK)
+                                new Position(File.A, Rank.EIGHT), new Rook(Color.BLACK),
+                                new Position(File.B, Rank.EIGHT), new Knight(Color.BLACK),
+                                new Position(File.C, Rank.EIGHT), new Bishop(Color.BLACK),
+                                new Position(File.D, Rank.EIGHT), new Queen(Color.BLACK),
+                                new Position(File.E, Rank.EIGHT), new King(Color.BLACK),
+                                new Position(File.F, Rank.EIGHT), new Bishop(Color.BLACK),
+                                new Position(File.G, Rank.EIGHT), new Knight(Color.BLACK),
+                                new Position(File.H, Rank.EIGHT), new Rook(Color.BLACK)
                         ))
         );
     }
@@ -82,8 +85,9 @@ class BoardFactoryTest {
         Board board = BoardFactory.create();
         // when, then
         Map<Position, Piece> initialPiecePositions = board.getBoard();
-        IntStream.rangeClosed(3, 6).boxed()
-                .flatMap(rank -> IntStream.rangeClosed(1, 8).boxed().map(file -> new Position(file, rank)))
+        Arrays.stream(Rank.values())
+                .filter(rank -> !List.of(Rank.ONE, Rank.TWO, Rank.SEVEN, Rank.EIGHT).contains(rank))
+                .flatMap(rank -> Arrays.stream(File.values()).map(file -> new Position(file, rank)))
                 .forEach(position -> assertThat(initialPiecePositions.get(position)).isEqualTo(new Empty()));
     }
 }

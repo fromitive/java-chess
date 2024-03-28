@@ -1,8 +1,11 @@
 package chess.domain.movement.direction;
 
+import static chess.domain.Fixtures.A1;
+import static chess.domain.Fixtures.C3;
+import static chess.domain.Fixtures.G7;
+import static chess.domain.Fixtures.H8;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import chess.domain.position.Position;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,10 +19,8 @@ class UpRightDirectionTest {
     void Given_UpRightDirection_When_CanReachWithReachablePosition_Then_True() {
         //given
         UpRightDirection direction = new UpRightDirection(8);
-        Position source = new Position(1, 1);
-        Position target = new Position(8, 8);
         //when, then
-        assertThat(direction.canReach(source, target, List.of())).isTrue();
+        assertThat(direction.canReach(A1, H8, List.of())).isTrue();
     }
 
     @ParameterizedTest
@@ -28,10 +29,8 @@ class UpRightDirectionTest {
     void Given_UpLeftDirection_When_CanReachWithUnreachablePosition_Then_False(int file, int rank) {
         //given
         UpRightDirection direction = new UpRightDirection(8);
-        Position source = new Position(file, rank);
-        Position target = new Position(1, 1);
         //when, then
-        assertThat(direction.canReach(source, target, List.of())).isFalse();
+        assertThat(direction.canReach(H8, A1, List.of())).isFalse();
     }
 
     @Test
@@ -39,10 +38,8 @@ class UpRightDirectionTest {
     void Given_UpLeftDirection_When_CanReachWithReachablePositionAndObstacle_Then_False() {
         //given
         UpRightDirection direction = new UpRightDirection(8);
-        Position source = new Position(1, 1);
-        Position target = new Position(8, 8);
         //when, then
-        assertThat(direction.canReach(source, target, List.of(new Position(7, 7)))).isFalse();
+        assertThat(direction.canReach(A1, H8, List.of(G7))).isFalse();
     }
 
     @Test
@@ -50,9 +47,7 @@ class UpRightDirectionTest {
     void Given_UpLeftDirection_When_CanReachWithUnreachableMoveCount_Then_False() {
         //given
         UpRightDirection direction = new UpRightDirection(1);
-        Position source = new Position(1, 1);
-        Position target = new Position(3, 3);
         //when, then
-        assertThat(direction.canReach(source, target, List.of())).isFalse();
+        assertThat(direction.canReach(A1, C3, List.of())).isFalse();
     }
 }

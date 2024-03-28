@@ -1,54 +1,79 @@
 package chess.domain.piece;
 
+import static chess.domain.Fixtures.A1;
+import static chess.domain.Fixtures.A4;
+import static chess.domain.Fixtures.A7;
+import static chess.domain.Fixtures.B2;
+import static chess.domain.Fixtures.B4;
+import static chess.domain.Fixtures.B6;
+import static chess.domain.Fixtures.C3;
+import static chess.domain.Fixtures.C4;
+import static chess.domain.Fixtures.D1;
+import static chess.domain.Fixtures.D2;
+import static chess.domain.Fixtures.D3;
+import static chess.domain.Fixtures.D4;
+import static chess.domain.Fixtures.D5;
+import static chess.domain.Fixtures.D6;
+import static chess.domain.Fixtures.D7;
+import static chess.domain.Fixtures.D8;
+import static chess.domain.Fixtures.E4;
+import static chess.domain.Fixtures.E5;
+import static chess.domain.Fixtures.F2;
+import static chess.domain.Fixtures.F4;
+import static chess.domain.Fixtures.F6;
+import static chess.domain.Fixtures.G1;
+import static chess.domain.Fixtures.G4;
+import static chess.domain.Fixtures.G7;
+import static chess.domain.Fixtures.H4;
+import static chess.domain.Fixtures.H8;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import chess.domain.position.Position;
 import java.util.Map;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class QueenTest {
+    private static final Position SOURCE = D4;
+
+    static Stream<Position> possibleTarget() {
+        return Stream.of(
+                A4, B4, C4, E4, F4, G4, H4, D1, D2, D3, D5, D6, D7, D8,
+                A1, B2, C3, E5, F6, G7, H8, G1, F2, E5, B6, A7
+        );
+    }
+
     @ParameterizedTest
-    @CsvSource({"1,1", "2,2", "3,3", "5,5", "6,6", "7,7", "8,8",
-            "7,1", "6,2", "3,5", "2,6", "1,7",
-            "8,4", "7,4", "6,4", "5,4", "3,4", "2,4", "1,4",
-            "4,1", "4,2", "4,3", "4,5", "4,6", "4,7", "4,8"})
+    @MethodSource("possibleTarget")
     @DisplayName("퀸은 도착 위치가 비어있는 경우 이동할 수 있다.")
-    void Given_Queen_When_CanMovePositionEmpty_Then_True(int file, int rank) {
+    void Given_Queen_When_CanMovePositionEmpty_Then_True(Position target) {
         //given
         Piece piece = new Queen(Color.WHITE);
         //when, then
-        assertThat(piece.canMove(new Position(4, 4), new Position(file, rank), Map.of())).isTrue();
+        assertThat(piece.canMove(SOURCE, target, Map.of())).isTrue();
     }
 
     @ParameterizedTest
-    @CsvSource({"1,1", "2,2", "3,3", "5,5", "6,6", "7,7", "8,8",
-            "7,1", "6,2", "3,5", "2,6", "1,7",
-            "8,4", "7,4", "6,4", "5,4", "3,4", "2,4", "1,4",
-            "4,1", "4,2", "4,3", "4,5", "4,6", "4,7", "4,8"})
+    @MethodSource("possibleTarget")
     @DisplayName("퀸은 도착 위치에 상대편 말이 있는 경우 이동할 수 있다.")
-    void Given_Queen_When_CanMovePositionEnemyPiece_Then_True(int file, int rank) {
+    void Given_Queen_When_CanMovePositionEnemyPiece_Then_True(Position target) {
         //given
         Piece piece = new Queen(Color.WHITE);
         //when, then
-        assertThat(piece.canMove(new Position(4, 4), new Position(file, rank),
-                Map.of(new Position(file, rank), new Queen(Color.BLACK)))).isTrue();
+        assertThat(piece.canMove(SOURCE, target, Map.of(target, new Queen(Color.BLACK)))).isTrue();
     }
 
     @ParameterizedTest
-    @CsvSource({"1,1", "2,2", "3,3", "5,5", "6,6", "7,7", "8,8",
-            "7,1", "6,2", "3,5", "2,6", "1,7",
-            "8,4", "7,4", "6,4", "5,4", "3,4", "2,4", "1,4",
-            "4,1", "4,2", "4,3", "4,5", "4,6", "4,7", "4,8"})
+    @MethodSource("possibleTarget")
     @DisplayName("퀸은 도착 위치에 우리편 말이 있는 경우 이동할 수 없다.")
-    void Given_Queen_When_CanNotMovePositionOurTeamPiece_Then_False(int file, int rank) {
+    void Given_Queen_When_CanNotMovePositionOurTeamPiece_Then_False(Position target) {
         //given
         Piece piece = new Queen(Color.WHITE);
         //when, then
-        assertThat(piece.canMove(new Position(4, 4), new Position(file, rank),
-                Map.of(new Position(file, rank), new Queen(Color.WHITE)))).isFalse();
+        assertThat(piece.canMove(SOURCE, target, Map.of(target, new Queen(Color.WHITE)))).isFalse();
     }
 
     @Test
@@ -57,7 +82,6 @@ class QueenTest {
         //given
         Piece piece = new Queen(Color.WHITE);
         //when, then
-        assertThat(piece.canMove(new Position(4, 4), new Position(8, 8),
-                Map.of(new Position(6, 6), new Queen(Color.WHITE)))).isFalse();
+        assertThat(piece.canMove(SOURCE, H8, Map.of(G7, new Queen(Color.WHITE)))).isFalse();
     }
 }

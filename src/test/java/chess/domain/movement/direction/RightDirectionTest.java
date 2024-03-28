@@ -1,8 +1,11 @@
 package chess.domain.movement.direction;
 
+import static chess.domain.Fixtures.A3;
+import static chess.domain.Fixtures.F3;
+import static chess.domain.Fixtures.G3;
+import static chess.domain.Fixtures.H3;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import chess.domain.position.Position;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,10 +17,8 @@ class RightDirectionTest {
     void Given_RightDirection_When_CanReachWithReachablePosition_Then_True() {
         //given
         RightDirection direction = new RightDirection(8);
-        Position source = new Position(1, 3);
-        Position target = new Position(8, 3);
         //when, then
-        assertThat(direction.canReach(source, target, List.of())).isTrue();
+        assertThat(direction.canReach(A3, H3, List.of())).isTrue();
     }
 
     @Test
@@ -25,10 +26,8 @@ class RightDirectionTest {
     void Given_RightDirection_When_CanReachWithUnreachablePosition_Then_False() {
         //given
         RightDirection direction = new RightDirection(8);
-        Position source = new Position(8, 3);
-        Position target = new Position(7, 3);
         //when, then
-        assertThat(direction.canReach(source, target, List.of())).isFalse();
+        assertThat(direction.canReach(H3, F3, List.of())).isFalse();
     }
 
     @Test
@@ -36,10 +35,8 @@ class RightDirectionTest {
     void Given_RightDirection_When_CanReachWithReachablePositionAndObstacle_Then_False() {
         //given
         RightDirection direction = new RightDirection(8);
-        Position source = new Position(6, 3);
-        Position target = new Position(8, 3);
         //when, then
-        assertThat(direction.canReach(source, target, List.of(new Position(7, 3)))).isFalse();
+        assertThat(direction.canReach(F3, H3, List.of(G3))).isFalse();
     }
 
     @Test
@@ -47,9 +44,7 @@ class RightDirectionTest {
     void Given_RightDirection_When_CanReachWithUnreachableMoveCount_then_False() {
         //given
         RightDirection direction = new RightDirection(1);
-        Position source = new Position(1, 3);
-        Position target = new Position(8, 3);
         //when, then
-        assertThat(direction.canReach(source, target, List.of())).isFalse();
+        assertThat(direction.canReach(A3, H3, List.of())).isFalse();
     }
 }

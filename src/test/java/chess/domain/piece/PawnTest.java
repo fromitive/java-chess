@@ -1,9 +1,17 @@
 package chess.domain.piece;
 
+import static chess.domain.Fixtures.A1;
+import static chess.domain.Fixtures.A2;
+import static chess.domain.Fixtures.A3;
+import static chess.domain.Fixtures.A4;
+import static chess.domain.Fixtures.A5;
+import static chess.domain.Fixtures.A7;
+import static chess.domain.Fixtures.B2;
+import static chess.domain.Fixtures.C1;
+import static chess.domain.Fixtures.D2;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-import chess.domain.position.Position;
 import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,7 +23,7 @@ class PawnTest {
         //given
         Piece whitePawn = new Pawn(Color.WHITE);
         //when, then
-        assertThat(whitePawn.canMove(new Position(1, 1), new Position(1, 2), Map.of())).isTrue();
+        assertThat(whitePawn.canMove(A1, A2, Map.of())).isTrue();
     }
 
     @Test
@@ -26,8 +34,8 @@ class PawnTest {
         Piece blackPawn = new Pawn(Color.BLACK);
         //when, then
         assertAll(
-                () -> assertThat(whitePawn.canMove(new Position(1, 2), new Position(1, 4), Map.of())).isTrue(),
-                () -> assertThat(blackPawn.canMove(new Position(1, 7), new Position(1, 5), Map.of())).isTrue()
+                () -> assertThat(whitePawn.canMove(A2, A4, Map.of())).isTrue(),
+                () -> assertThat(blackPawn.canMove(A7, A5, Map.of())).isTrue()
         );
     }
 
@@ -38,10 +46,9 @@ class PawnTest {
         Piece whitePawn = new Pawn(Color.WHITE);
         //when, then
         assertAll(
-                () -> assertThat(whitePawn.canMove(new Position(3, 1), new Position(2, 2),
-                        Map.of(new Position(2, 2), new Pawn(Color.BLACK)))).isTrue(),
-                () -> assertThat(whitePawn.canMove(new Position(3, 1), new Position(4, 2),
-                        Map.of(new Position(4, 2), new Pawn(Color.BLACK)))).isTrue());
+                () -> assertThat(whitePawn.canMove(C1, B2, Map.of(B2, new Pawn(Color.BLACK)))).isTrue(),
+                () -> assertThat(whitePawn.canMove(C1, D2, Map.of(D2, new Pawn(Color.BLACK)))).isTrue()
+        );
     }
 
     @Test
@@ -51,10 +58,9 @@ class PawnTest {
         Piece whitePawn = new Pawn(Color.WHITE);
         //when, then
         assertAll(
-                () -> assertThat(whitePawn.canMove(new Position(1, 1), new Position(1, 2),
-                        Map.of(new Position(1, 2), new Pawn(Color.WHITE)))).isFalse(),
-                () -> assertThat(whitePawn.canMove(new Position(1, 1), new Position(1, 2),
-                        Map.of(new Position(1, 2), new Pawn(Color.BLACK)))).isFalse());
+                () -> assertThat(whitePawn.canMove(A1, A2, Map.of(A2, new Pawn(Color.WHITE)))).isFalse(),
+                () -> assertThat(whitePawn.canMove(A1, A2, Map.of(A2, new Pawn(Color.BLACK)))).isFalse()
+        );
     }
 
     @Test
@@ -64,10 +70,9 @@ class PawnTest {
         Piece whitePawn = new Pawn(Color.WHITE);
         //when, then
         assertAll(
-                () -> assertThat(whitePawn.canMove(new Position(1, 1), new Position(1, 3),
-                        Map.of(new Position(1, 2), new Pawn(Color.BLACK)))).isFalse(),
-                () -> assertThat(whitePawn.canMove(new Position(1, 1), new Position(1, 3),
-                        Map.of(new Position(1, 2), new Pawn(Color.WHITE)))).isFalse());
+                () -> assertThat(whitePawn.canMove(A1, A3, Map.of(A2, new Pawn(Color.BLACK)))).isFalse(),
+                () -> assertThat(whitePawn.canMove(A1, A3, Map.of(A2, new Pawn(Color.WHITE)))).isFalse()
+        );
     }
 
     @Test
@@ -75,10 +80,9 @@ class PawnTest {
     void Given_Pawn_When_CanNotMoveDiagonalPositionSameColorPiece_Then_False() {
         Piece whitePawn = new Pawn(Color.WHITE);
         assertAll(
-                () -> assertThat(whitePawn.canMove(new Position(3, 1), new Position(2, 2),
-                        Map.of(new Position(2, 2), new Pawn(Color.WHITE)))).isFalse(),
-                () -> assertThat(whitePawn.canMove(new Position(3, 1), new Position(4, 2),
-                        Map.of(new Position(4, 2), new Pawn(Color.WHITE)))).isFalse());
+                () -> assertThat(whitePawn.canMove(C1, B2, Map.of(B2, new Pawn(Color.WHITE)))).isFalse(),
+                () -> assertThat(whitePawn.canMove(C1, D2, Map.of(B2, new Pawn(Color.WHITE)))).isFalse()
+        );
     }
 
     @Test
@@ -86,9 +90,7 @@ class PawnTest {
     void Given_Pawn_When_CanNotMoveDiagonalPositionEmpty_Then_False() {
         Piece whitePawn = new Pawn(Color.WHITE);
         assertAll(
-                () -> assertThat(
-                        whitePawn.canMove(new Position(3, 1), new Position(2, 2), Map.of())).isFalse(),
-                () -> assertThat(
-                        whitePawn.canMove(new Position(3, 1), new Position(4, 2), Map.of())).isFalse());
+                () -> assertThat(whitePawn.canMove(C1, B2, Map.of())).isFalse(),
+                () -> assertThat(whitePawn.canMove(C1, D2, Map.of())).isFalse());
     }
 }

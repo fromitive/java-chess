@@ -2,31 +2,24 @@ package chess.view.output;
 
 import chess.domain.board.Board;
 import chess.domain.piece.Piece;
+import chess.domain.position.File;
 import chess.domain.position.Position;
+import chess.domain.position.Rank;
 import chess.view.input.command.GameCommand;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class OutputView {
-
-    private static final int MINIMUM_FILE_RANGE = 1;
-    private static final int MAXIMUM_FILE_RANGE = 8;
-    private static final int MINIMUM_RANK_RANGE = 1;
-    private static final int MAXIMUM_RANK_RANGE = 8;
-
     public void printBoard(final Board board) {
         Map<Position, Piece> positions = board.getBoard();
-        for (int rank = MAXIMUM_RANK_RANGE; rank >= MINIMUM_RANK_RANGE; rank--) {
-            printRankLine(positions, rank);
-        }
+        Arrays.stream(Rank.values()).sorted(Collections.reverseOrder()).forEach(rank -> printRankLine(positions, rank));
         System.out.println();
     }
 
-    private void printRankLine(final Map<Position, Piece> positions, final int rank) {
-        String rankLine = IntStream.rangeClosed(MINIMUM_FILE_RANGE, MAXIMUM_FILE_RANGE)
-                .boxed()
+    private void printRankLine(final Map<Position, Piece> positions, final Rank rank) {
+        String rankLine = Arrays.stream(File.values())
                 .map(file -> positions.get(new Position(file, rank)))
                 .map(PieceSymbol::getDisplay)
                 .collect(Collectors.joining(""));

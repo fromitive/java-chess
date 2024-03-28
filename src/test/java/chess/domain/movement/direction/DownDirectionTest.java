@@ -1,8 +1,16 @@
 package chess.domain.movement.direction;
 
+import static chess.domain.Fixtures.C1;
+import static chess.domain.Fixtures.C2;
+import static chess.domain.Fixtures.C4;
+import static chess.domain.Fixtures.C8;
+import static chess.domain.Fixtures.F1;
+import static chess.domain.Fixtures.H8;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import chess.domain.position.File;
 import chess.domain.position.Position;
+import chess.domain.position.Rank;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,10 +22,8 @@ class DownDirectionTest {
     void Given_DownDirection_When_CanReachWithReachablePosition_Then_True() {
         //given
         DownDirection direction = new DownDirection(8);
-        Position source = new Position(3, 3);
-        Position target = new Position(3, 1);
         //when, then
-        assertThat(direction.canReach(source, target, List.of())).isTrue();
+        assertThat(direction.canReach(C4, C1, List.of())).isTrue();
     }
 
     @Test
@@ -25,10 +31,8 @@ class DownDirectionTest {
     void Given_DownDirection_When_CanReachWithUnreachablePosition_Then_False() {
         //given
         DownDirection direction = new DownDirection(8);
-        Position source = new Position(3, 1);
-        Position target = new Position(3, 2);
         //when, then
-        assertThat(direction.canReach(source, target, List.of())).isFalse();
+        assertThat(direction.canReach(C1, C2, List.of())).isFalse();
     }
 
     @Test
@@ -36,10 +40,8 @@ class DownDirectionTest {
     void Given_DownDirection_When_CanReachWithReachablePositionAndObstacle_Then_False() {
         //given
         DownDirection direction = new DownDirection(8);
-        Position source = new Position(3, 8);
-        Position target = new Position(3, 1);
         //when, then
-        assertThat(direction.canReach(source, target, List.of(new Position(3, 4)))).isFalse();
+        assertThat(direction.canReach(C8, C1, List.of(new Position(File.C, Rank.FOUR)))).isFalse();
     }
 
     @Test
@@ -47,9 +49,7 @@ class DownDirectionTest {
     void Given_DownDirection_When_CanReachWithUnreachableMoveCount_Then_False() {
         //given
         DownDirection direction = new DownDirection(1);
-        Position source = new Position(8, 8);
-        Position target = new Position(6, 1);
         //when, then
-        assertThat(direction.canReach(source, target, List.of())).isFalse();
+        assertThat(direction.canReach(H8, F1, List.of())).isFalse();
     }
 }

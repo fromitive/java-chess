@@ -8,7 +8,9 @@ import chess.domain.piece.Color;
 import chess.domain.piece.Empty;
 import chess.domain.piece.Pawn;
 import chess.domain.piece.Piece;
+import chess.domain.position.File;
 import chess.domain.position.Position;
+import chess.domain.position.Rank;
 import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,13 +23,13 @@ class BoardTest {
         //given
         Board board = BoardFactory.create();
         //when
-        board.move(new Position(1, 2), new Position(1, 4), Color.WHITE);
+        board.move(new Position(File.A, Rank.TWO), new Position(File.A, Rank.FOUR), Color.WHITE);
         Map<Position, Piece> boardPieces = board.getBoard();
         //then
         assertAll(
-                () -> assertThat(boardPieces.get(new Position(1, 2)))
+                () -> assertThat(boardPieces.get(new Position(File.A, Rank.TWO)))
                         .isEqualTo(new Empty()),
-                () -> assertThat(boardPieces.get(new Position(1, 4)))
+                () -> assertThat(boardPieces.get(new Position(File.A, Rank.FOUR)))
                         .isEqualTo(new Pawn(Color.WHITE)));
     }
 
@@ -37,7 +39,8 @@ class BoardTest {
         //given
         Board board = BoardFactory.create();
         //when, then
-        assertThatThrownBy(() -> board.move(new Position(1, 1), new Position(1, 2), Color.WHITE))
+        assertThatThrownBy(
+                () -> board.move(new Position(File.A, Rank.ONE), new Position(File.A, Rank.TWO), Color.WHITE))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("이동이 불가능한 위치입니다.");
     }
@@ -48,7 +51,8 @@ class BoardTest {
         //given
         Board board = BoardFactory.create();
         //when, then
-        assertThatThrownBy(() -> board.move(new Position(1, 7), new Position(1, 5), Color.WHITE))
+        assertThatThrownBy(
+                () -> board.move(new Position(File.A, Rank.SEVEN), new Position(File.A, Rank.FIVE), Color.WHITE))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("상대 팀의 기물을 이동시킬 수 없습니다.");
     }
@@ -59,7 +63,8 @@ class BoardTest {
         //given
         Board board = BoardFactory.create();
         //when, then
-        assertThatThrownBy(() -> board.move(new Position(3, 6), new Position(4, 6), Color.WHITE))
+        assertThatThrownBy(
+                () -> board.move(new Position(File.C, Rank.SIX), new Position(File.D, Rank.SIX), Color.WHITE))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("기물이 존재하지 않아 이동시킬 수 없습니다.");
     }

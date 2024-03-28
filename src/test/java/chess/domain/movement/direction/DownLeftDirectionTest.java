@@ -1,13 +1,17 @@
 package chess.domain.movement.direction;
 
+import static chess.domain.Fixtures.A1;
+import static chess.domain.Fixtures.A2;
+import static chess.domain.Fixtures.B2;
+import static chess.domain.Fixtures.H8;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import chess.domain.position.File;
 import chess.domain.position.Position;
+import chess.domain.position.Rank;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
 class DownLeftDirectionTest {
 
@@ -16,22 +20,17 @@ class DownLeftDirectionTest {
     void Given_DownLeftDirection_When_CanReachWithReachablePosition_Then_True() {
         //given
         DownLeftDirection direction = new DownLeftDirection(8);
-        Position source = new Position(8, 8);
-        Position target = new Position(1, 1);
         //when, then
-        assertThat(direction.canReach(source, target, List.of())).isTrue();
+        assertThat(direction.canReach(H8, A1, List.of())).isTrue();
     }
 
-    @ParameterizedTest
-    @CsvSource({"1,1", "8,1", "1,8"})
+    @Test
     @DisplayName("현재 위치에서 더이상 이동이 불가능한 경우 거짓을 반환한다.")
-    void Given_DownLeftDirection_When_CanReachWithUnreachablePosition_Then_False(int file, int rank) {
+    void Given_DownLeftDirection_When_CanReachWithUnreachablePosition_Then_False() {
         //given
         DownLeftDirection direction = new DownLeftDirection(8);
-        Position source = new Position(file, rank);
-        Position target = new Position(2, 2);
         //when, then
-        assertThat(direction.canReach(source, target, List.of())).isFalse();
+        assertThat(direction.canReach(A2, B2, List.of())).isFalse();
     }
 
     @Test
@@ -39,10 +38,8 @@ class DownLeftDirectionTest {
     void Given_DownLeftDirection_When_CanReachWithReachablePositionAndObstacle_Then_False() {
         //given
         DownLeftDirection direction = new DownLeftDirection(8);
-        Position source = new Position(8, 8);
-        Position target = new Position(1, 1);
         //when, then
-        assertThat(direction.canReach(source, target, List.of(new Position(7, 7)))).isFalse();
+        assertThat(direction.canReach(H8, A1, List.of(new Position(File.G, Rank.SEVEN)))).isFalse();
     }
 
     @Test
@@ -50,9 +47,7 @@ class DownLeftDirectionTest {
     void Given_DownLeftDirection_When_CanReachWithUnreachableMoveCount_Then_False() {
         //given
         DownLeftDirection direction = new DownLeftDirection(1);
-        Position source = new Position(8, 8);
-        Position target = new Position(1, 1);
         //when, then
-        assertThat(direction.canReach(source, target, List.of())).isFalse();
+        assertThat(direction.canReach(H8, A1, List.of())).isFalse();
     }
 }

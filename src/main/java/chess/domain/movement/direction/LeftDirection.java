@@ -13,6 +13,6 @@ public class LeftDirection extends StraightDirection {
         if (position.isMinimumFile()) {
             return position;
         }
-        return new Position(position.file() - 1, position.rank());
+        return new Position(position.file().move(-1), position.rank());
     }
 }

@@ -18,8 +18,8 @@ public class KnightDirection implements Direction {
     private List<Position> getPossiblePosition(final Position position) {
         return Arrays.stream(Vector.values())
                 .filter(position::isNextPositionInRange)
-                .map(vector -> new Position(vector.getFileVector() + position.file(),
-                        vector.getRankVector() + position.rank()))
+                .map(vector -> new Position(position.file().move(vector.getFileVector()),
+                        position.rank().move(vector.getRankVector())))
                 .toList();
     }
 }

@@ -14,16 +14,8 @@ public class PositionConverter {
     private static Position convertPosition(String position) {
         String file = position.substring(0, 1);
         String rank = position.substring(1, 2);
-        validateNumeric(rank);
         FileSymbol fileSymbol = FileSymbol.getFileSymbol(file);
-        return new Position(fileSymbol.getFile(), Integer.parseInt(rank));
-    }
-
-    private static void validateNumeric(String rank) {
-        try {
-            Integer.parseInt(rank);
-        } catch (NumberFormatException exception) {
-            throw new IllegalArgumentException("Rank에 문자를 입력할 수 없습니다.");
-        }
+        RankSymbol rankSymbol = RankSymbol.getRankSymbol(rank);
+        return new Position(fileSymbol.getFile(), rankSymbol.getRank());
     }
 }
