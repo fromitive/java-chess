@@ -5,5 +5,5 @@ import java.util.List;
 
 public interface Direction {
 
-    boolean canReach(Position source, Position target, List<Position> obstacle);
+    boolean canReach(final Position source, final Position target, final List<Position> obstacle);
 }

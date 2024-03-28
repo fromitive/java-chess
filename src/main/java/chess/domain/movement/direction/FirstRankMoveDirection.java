@@ -9,13 +9,13 @@ public class FirstRankMoveDirection implements Direction {
     private final Direction direction;
     private final Rank startRank;
 
-    public FirstRankMoveDirection(Direction direction, Rank startRank) {
+    public FirstRankMoveDirection(final Direction direction, final Rank startRank) {
         this.direction = direction;
         this.startRank = startRank;
     }
 
     @Override
-    public boolean canReach(Position source, Position target, List<Position> obstacle) {
+    public boolean canReach(final Position source, final Position target, final List<Position> obstacle) {
         if (source.rank().equals(startRank)) {
             return direction.canReach(source, target, obstacle);
         }
