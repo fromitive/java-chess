@@ -2,7 +2,7 @@ package chess.domain.movement.direction;
 
 import chess.domain.position.Position;
 
-public class UpLeftDirection extends StraightDirection {
+public class UpLeftDirection extends SlidingDirection {
 
     public UpLeftDirection(final int moveCount) {
         super(moveCount);

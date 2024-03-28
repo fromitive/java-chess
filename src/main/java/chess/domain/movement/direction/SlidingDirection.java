@@ -4,11 +4,11 @@ import chess.domain.position.Position;
 import java.util.List;
 import java.util.stream.Stream;
 
-abstract class StraightDirection implements Direction {
+abstract class SlidingDirection implements Direction {
 
     private final int moveCount;
 
-    protected StraightDirection(final int moveCount) {
+    protected SlidingDirection(final int moveCount) {
         this.moveCount = moveCount;
     }
 
