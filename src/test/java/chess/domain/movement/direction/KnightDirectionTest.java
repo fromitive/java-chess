@@ -40,14 +40,6 @@ class KnightDirectionTest {
         assertThat(direction.canReach(SOURCE, target, List.of())).isTrue();
     }
 
-    @DisplayName("도착 위치에 장애물이 있을 경우 거짓을 반환한다.")
-    void Given_KnightDirection_When_CanReachWithReachablePositionAndObstacle_Then_False() {
-        //given
-        KnightDirection direction = new KnightDirection();
-        //when, then
-        assertThat(direction.canReach(SOURCE, B5, List.of(B5))).isFalse();
-    }
-
     @Test
     @DisplayName("현재 위치에서 도착 위치까지 이동이 불가능한 경우 거짓을 반환한다.")
     void Given_KnightDirection_When_canReachWithUnreachablePosition_Then_False() {
