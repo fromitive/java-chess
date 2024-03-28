@@ -42,4 +42,18 @@ class RankTest {
         //given, when, then
         assertThat(Rank.ONE.canMoveNext(step)).isEqualTo(expected);
     }
+
+    @Test
+    @DisplayName("랭크의 최소 값은 1이다.")
+    void Given_RankOne_When_isMinimum_Then_True() {
+        //given, when, then
+        assertThat(Rank.ONE.isMinimum()).isTrue();
+    }
+
+    @Test
+    @DisplayName("랭크의 최대 값은 8이다.")
+    void Given_RankEight_When_isMaximum_Then_True() {
+        //given, when, then
+        assertThat(Rank.EIGHT.isMaximum()).isTrue();
+    }
 }

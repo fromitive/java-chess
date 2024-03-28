@@ -42,4 +42,18 @@ class FileTest {
         //given, when, then
         assertThat(File.A.canMoveNext(step)).isEqualTo(expected);
     }
+
+    @Test
+    @DisplayName("파일의 최소 값은 A이다.")
+    void Given_FileA_When_isMinimum_Then_True() {
+        //given, when, then
+        assertThat(File.A.isMinimum()).isTrue();
+    }
+
+    @Test
+    @DisplayName("파일의 최대 값은 h이다.")
+    void Given_FileH_When_isMaximum_Then_True() {
+        //given, when, then
+        assertThat(File.H.isMaximum()).isTrue();
+    }
 }

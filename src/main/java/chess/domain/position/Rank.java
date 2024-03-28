@@ -16,11 +16,19 @@ public enum Rank {
             return Rank.values()[ordinal() + step];
         }
 
-        throw new IllegalArgumentException("해당 파일 위치로 이동할 수 없습니다.");
+        throw new IllegalArgumentException("해당 랭크 위치로 이동할 수 없습니다.");
     }
 
     public boolean canMoveNext(int step) {
         int next = ordinal() + step;
         return next < File.values().length && next >= 0;
+    }
+
+    public boolean isMinimum() {
+        return this == Rank.ONE;
+    }
+
+    public boolean isMaximum() {
+        return this == Rank.EIGHT;
     }
 }

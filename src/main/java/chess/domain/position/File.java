@@ -22,4 +22,12 @@ public enum File {
         int next = ordinal() + step;
         return next < File.values().length && next >= 0;
     }
+
+    public boolean isMinimum() {
+        return this == File.A;
+    }
+
+    public boolean isMaximum() {
+        return this == File.H;
+    }
 }
