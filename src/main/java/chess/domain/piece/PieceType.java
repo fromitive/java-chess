@@ -1,6 +1,5 @@
 package chess.domain.piece;
 
-import chess.domain.Obstacle;
 import chess.domain.direction.CombinationDirection;
 import chess.domain.direction.DiagonalDirection;
 import chess.domain.direction.DiagonalStraightDirection;
@@ -17,6 +16,7 @@ import chess.domain.direction.UpRightDirection;
 import chess.domain.movementpolicy.DifferentPolicy;
 import chess.domain.movementpolicy.MovementPolicy;
 import chess.domain.movementpolicy.SameMovementPolicy;
+import chess.domain.position.Obstacle;
 import chess.domain.position.Position;
 import chess.domain.position.Rank;
 

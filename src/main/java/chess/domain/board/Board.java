@@ -1,8 +1,8 @@
 package chess.domain.board;
 
-import chess.domain.Obstacle;
 import chess.domain.piece.Color;
 import chess.domain.piece.Piece;
+import chess.domain.position.Obstacle;
 import chess.domain.position.Position;
 import java.util.Collections;
 import java.util.List;

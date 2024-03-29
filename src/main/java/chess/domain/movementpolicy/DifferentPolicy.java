@@ -1,7 +1,7 @@
 package chess.domain.movementpolicy;
 
-import chess.domain.Obstacle;
 import chess.domain.direction.Direction;
+import chess.domain.position.Obstacle;
 import chess.domain.position.Position;
 
 public class DifferentPolicy implements MovementPolicy {

@@ -1,6 +1,6 @@
 package chess.domain.movementpolicy;
 
-import chess.domain.Obstacle;
+import chess.domain.position.Obstacle;
 import chess.domain.position.Position;
 
 public interface MovementPolicy {

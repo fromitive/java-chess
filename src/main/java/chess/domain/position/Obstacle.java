@@ -1,6 +1,5 @@
-package chess.domain;
+package chess.domain.position;
 
-import chess.domain.position.Position;
 import java.util.List;
 
 public class Obstacle {

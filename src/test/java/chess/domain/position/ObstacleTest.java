@@ -1,4 +1,4 @@
-package chess.domain;
+package chess.domain.position;
 
 import static chess.domain.Fixtures.A1;
 import static chess.domain.Fixtures.B2;

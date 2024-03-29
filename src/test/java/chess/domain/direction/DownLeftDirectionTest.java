@@ -8,7 +8,7 @@ import static chess.domain.Fixtures.G7;
 import static chess.domain.Fixtures.H8;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import chess.domain.Obstacle;
+import chess.domain.position.Obstacle;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
