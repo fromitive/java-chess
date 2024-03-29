@@ -20,7 +20,6 @@ import static chess.domain.Fixtures.E1;
 import static chess.domain.Fixtures.E2;
 import static chess.domain.Fixtures.E7;
 import static chess.domain.Fixtures.E8;
-import static chess.domain.Fixtures.EMPTY_PIECE;
 import static chess.domain.Fixtures.F1;
 import static chess.domain.Fixtures.F2;
 import static chess.domain.Fixtures.F7;
@@ -61,14 +60,14 @@ class BoardFactoryTest {
         assertAll(
                 () -> assertThat(initialPiecePositions)
                         .containsAllEntriesOf(Map.of(
-                                A1, new Piece(PieceType.ROOK, Color.WHITE),
-                                B1, new Piece(PieceType.KNIGHT, Color.WHITE),
-                                C1, new Piece(PieceType.BISHOP, Color.WHITE),
-                                D1, new Piece(PieceType.QUEEN, Color.WHITE),
-                                E1, new Piece(PieceType.KING, Color.WHITE),
-                                F1, new Piece(PieceType.BISHOP, Color.WHITE),
-                                G1, new Piece(PieceType.KNIGHT, Color.WHITE),
-                                H1, new Piece(PieceType.ROOK, Color.WHITE)
+                                A1, Piece.of(PieceType.ROOK, Color.WHITE),
+                                B1, Piece.of(PieceType.KNIGHT, Color.WHITE),
+                                C1, Piece.of(PieceType.BISHOP, Color.WHITE),
+                                D1, Piece.of(PieceType.QUEEN, Color.WHITE),
+                                E1, Piece.of(PieceType.KING, Color.WHITE),
+                                F1, Piece.of(PieceType.BISHOP, Color.WHITE),
+                                G1, Piece.of(PieceType.KNIGHT, Color.WHITE),
+                                H1, Piece.of(PieceType.ROOK, Color.WHITE)
                         )),
                 () -> assertThat(initialPiecePositions)
                         .containsAllEntriesOf(Map.of(
@@ -94,14 +93,14 @@ class BoardFactoryTest {
                         )),
                 () -> assertThat(initialPiecePositions)
                         .containsAllEntriesOf(Map.of(
-                                A8, new Piece(PieceType.ROOK, Color.BLACK),
-                                B8, new Piece(PieceType.KNIGHT, Color.BLACK),
-                                C8, new Piece(PieceType.BISHOP, Color.BLACK),
-                                D8, new Piece(PieceType.QUEEN, Color.BLACK),
-                                E8, new Piece(PieceType.KING, Color.BLACK),
-                                F8, new Piece(PieceType.BISHOP, Color.BLACK),
-                                G8, new Piece(PieceType.KNIGHT, Color.BLACK),
-                                H8, new Piece(PieceType.ROOK, Color.BLACK)
+                                A8, Piece.of(PieceType.ROOK, Color.BLACK),
+                                B8, Piece.of(PieceType.KNIGHT, Color.BLACK),
+                                C8, Piece.of(PieceType.BISHOP, Color.BLACK),
+                                D8, Piece.of(PieceType.QUEEN, Color.BLACK),
+                                E8, Piece.of(PieceType.KING, Color.BLACK),
+                                F8, Piece.of(PieceType.BISHOP, Color.BLACK),
+                                G8, Piece.of(PieceType.KNIGHT, Color.BLACK),
+                                H8, Piece.of(PieceType.ROOK, Color.BLACK)
                         ))
         );
     }
@@ -116,6 +115,6 @@ class BoardFactoryTest {
         Arrays.stream(Rank.values())
                 .filter(rank -> !List.of(Rank.ONE, Rank.TWO, Rank.SEVEN, Rank.EIGHT).contains(rank))
                 .flatMap(rank -> Arrays.stream(File.values()).map(file -> new Position(file, rank)))
-                .forEach(position -> assertThat(initialPiecePositions.get(position)).isEqualTo(EMPTY_PIECE));
+                .forEach(position -> assertThat(initialPiecePositions.get(position)).isEqualTo(Piece.EMPTY_PIECE));
     }
 }

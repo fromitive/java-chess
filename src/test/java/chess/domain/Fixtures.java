@@ -1,8 +1,5 @@
 package chess.domain;
 
-import chess.domain.piece.Color;
-import chess.domain.piece.Piece;
-import chess.domain.piece.PieceType;
 import chess.domain.position.File;
 import chess.domain.position.Obstacle;
 import chess.domain.position.Position;
@@ -75,7 +72,6 @@ public class Fixtures {
     public static final Position H7 = new Position(File.H, Rank.SEVEN);
     public static final Position H8 = new Position(File.H, Rank.EIGHT);
     public static final Obstacle EMPTY_OBSTACLE = new Obstacle(List.of());
-    public static final Piece EMPTY_PIECE = new Piece(PieceType.EMPTY, Color.NONE);
 
     private Fixtures() {
     }

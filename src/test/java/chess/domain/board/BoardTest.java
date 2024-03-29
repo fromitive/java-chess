@@ -9,7 +9,6 @@ import static chess.domain.Fixtures.B2;
 import static chess.domain.Fixtures.B8;
 import static chess.domain.Fixtures.C6;
 import static chess.domain.Fixtures.D6;
-import static chess.domain.Fixtures.EMPTY_PIECE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -34,7 +33,7 @@ class BoardTest {
         //then
         Map<Position, Piece> boardPieces = board.getBoard();
         assertAll(
-                () -> assertThat(boardPieces.get(A2)).isEqualTo(EMPTY_PIECE),
+                () -> assertThat(boardPieces.get(A2)).isEqualTo(Piece.EMPTY_PIECE),
                 () -> assertThat(boardPieces.get(A4)).isEqualTo(Pawn.of(Color.WHITE)))
         ;
     }

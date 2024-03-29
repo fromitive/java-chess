@@ -58,14 +58,14 @@ public class BoardFactory {
     }
 
     private static Map<Position, Piece> getNotPawnsPieces(final Color color, final Rank rank) {
-        return Map.of(new Position(File.A, rank), new Piece(PieceType.ROOK, color),
-                new Position(File.B, rank), new Piece(PieceType.KNIGHT, color),
-                new Position(File.C, rank), new Piece(PieceType.BISHOP, color),
-                new Position(File.D, rank), new Piece(PieceType.QUEEN, color),
-                new Position(File.E, rank), new Piece(PieceType.KING, color),
-                new Position(File.F, rank), new Piece(PieceType.BISHOP, color),
-                new Position(File.G, rank), new Piece(PieceType.KNIGHT, color),
-                new Position(File.H, rank), new Piece(PieceType.ROOK, color));
+        return Map.of(new Position(File.A, rank), Piece.of(PieceType.ROOK, color),
+                new Position(File.B, rank), Piece.of(PieceType.KNIGHT, color),
+                new Position(File.C, rank), Piece.of(PieceType.BISHOP, color),
+                new Position(File.D, rank), Piece.of(PieceType.QUEEN, color),
+                new Position(File.E, rank), Piece.of(PieceType.KING, color),
+                new Position(File.F, rank), Piece.of(PieceType.BISHOP, color),
+                new Position(File.G, rank), Piece.of(PieceType.KNIGHT, color),
+                new Position(File.H, rank), Piece.of(PieceType.ROOK, color));
     }
 
     private static Map<Position, Piece> getPawnsPieces(final Color color, final Rank rank) {
