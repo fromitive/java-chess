@@ -57,14 +57,14 @@ public class Board {
     }
 
     private boolean canAttack(Position source, Position target, Piece sourcePiece) {
-        return sourcePiece.canAttack(source, target, new Obstacle(getBoardPositions()));
+        return sourcePiece.canAttack(source, target, new Obstacle(getNonEmptyPiecePosition()));
     }
 
     private boolean canMove(Position source, Position target, Piece sourcePiece) {
-        return sourcePiece.canMove(source, target, new Obstacle(getBoardPositions()));
+        return sourcePiece.canMove(source, target, new Obstacle(getNonEmptyPiecePosition()));
     }
 
-    private List<Position> getBoardPositions() {
+    private List<Position> getNonEmptyPiecePosition() {
         return board.entrySet().stream()
                 .filter(position -> !position.getValue().isEmpty())
                 .map(Entry::getKey)
