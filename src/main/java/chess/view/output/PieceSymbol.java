@@ -12,7 +12,7 @@ public enum PieceSymbol {
     BISHOP(PieceType.BISHOP, "b"),
     ROOK(PieceType.ROOK, "r"),
     WHITE_PAWN(PieceType.WHITE_PAWN, "p"),
-    BACK_PAWN(PieceType.BACK_PAWN, "P"),
+    BLACK_PAWN(PieceType.BLACK_PAWN, "P"),
     EMPTY(PieceType.EMPTY, "."),
     ;
 

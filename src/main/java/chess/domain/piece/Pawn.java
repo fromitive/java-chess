@@ -10,6 +10,6 @@ public class Pawn extends Piece {
         if (color == Color.WHITE) {
             return new Pawn(PieceType.WHITE_PAWN, Color.WHITE);
         }
-        return new Pawn(PieceType.BACK_PAWN, Color.BLACK);
+        return new Pawn(PieceType.BLACK_PAWN, Color.BLACK);
     }
 }

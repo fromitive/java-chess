@@ -29,7 +29,7 @@ public enum PieceType {
     WHITE_PAWN(new DifferentPolicy(
             new CombinationDirection(new UpLeftDirection(1), new UpRightDirection(1)),
             new CombinationDirection(new FirstRankMoveDirection(new UpDirection(2), Rank.TWO), new UpDirection(1)))),
-    BACK_PAWN(new DifferentPolicy(
+    BLACK_PAWN(new DifferentPolicy(
             new CombinationDirection(new DownRightDirection(1), new DownLeftDirection(1)),
             new CombinationDirection(new FirstRankMoveDirection(new DownDirection(2), Rank.SEVEN),
                     new UpDirection(1)))),
