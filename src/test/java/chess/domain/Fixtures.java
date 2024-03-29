@@ -1,8 +1,12 @@
 package chess.domain;
 
+import chess.domain.piece.Color;
+import chess.domain.piece.Piece;
+import chess.domain.piece.PieceType;
 import chess.domain.position.File;
 import chess.domain.position.Position;
 import chess.domain.position.Rank;
+import java.util.List;
 
 public class Fixtures {
     public static final Position A1 = new Position(File.A, Rank.ONE);
@@ -13,7 +17,6 @@ public class Fixtures {
     public static final Position A6 = new Position(File.A, Rank.SIX);
     public static final Position A7 = new Position(File.A, Rank.SEVEN);
     public static final Position A8 = new Position(File.A, Rank.EIGHT);
-
     public static final Position B1 = new Position(File.B, Rank.ONE);
     public static final Position B2 = new Position(File.B, Rank.TWO);
     public static final Position B3 = new Position(File.B, Rank.THREE);
@@ -22,7 +25,6 @@ public class Fixtures {
     public static final Position B6 = new Position(File.B, Rank.SIX);
     public static final Position B7 = new Position(File.B, Rank.SEVEN);
     public static final Position B8 = new Position(File.B, Rank.EIGHT);
-
     public static final Position C1 = new Position(File.C, Rank.ONE);
     public static final Position C2 = new Position(File.C, Rank.TWO);
     public static final Position C3 = new Position(File.C, Rank.THREE);
@@ -31,7 +33,6 @@ public class Fixtures {
     public static final Position C6 = new Position(File.C, Rank.SIX);
     public static final Position C7 = new Position(File.C, Rank.SEVEN);
     public static final Position C8 = new Position(File.C, Rank.EIGHT);
-
     public static final Position D1 = new Position(File.D, Rank.ONE);
     public static final Position D2 = new Position(File.D, Rank.TWO);
     public static final Position D3 = new Position(File.D, Rank.THREE);
@@ -40,7 +41,6 @@ public class Fixtures {
     public static final Position D6 = new Position(File.D, Rank.SIX);
     public static final Position D7 = new Position(File.D, Rank.SEVEN);
     public static final Position D8 = new Position(File.D, Rank.EIGHT);
-
     public static final Position E1 = new Position(File.E, Rank.ONE);
     public static final Position E2 = new Position(File.E, Rank.TWO);
     public static final Position E3 = new Position(File.E, Rank.THREE);
@@ -49,7 +49,6 @@ public class Fixtures {
     public static final Position E6 = new Position(File.E, Rank.SIX);
     public static final Position E7 = new Position(File.E, Rank.SEVEN);
     public static final Position E8 = new Position(File.E, Rank.EIGHT);
-
     public static final Position F1 = new Position(File.F, Rank.ONE);
     public static final Position F2 = new Position(File.F, Rank.TWO);
     public static final Position F3 = new Position(File.F, Rank.THREE);
@@ -58,7 +57,6 @@ public class Fixtures {
     public static final Position F6 = new Position(File.F, Rank.SIX);
     public static final Position F7 = new Position(File.F, Rank.SEVEN);
     public static final Position F8 = new Position(File.F, Rank.EIGHT);
-
     public static final Position G1 = new Position(File.G, Rank.ONE);
     public static final Position G2 = new Position(File.G, Rank.TWO);
     public static final Position G3 = new Position(File.G, Rank.THREE);
@@ -67,7 +65,6 @@ public class Fixtures {
     public static final Position G6 = new Position(File.G, Rank.SIX);
     public static final Position G7 = new Position(File.G, Rank.SEVEN);
     public static final Position G8 = new Position(File.G, Rank.EIGHT);
-
     public static final Position H1 = new Position(File.H, Rank.ONE);
     public static final Position H2 = new Position(File.H, Rank.TWO);
     public static final Position H3 = new Position(File.H, Rank.THREE);
@@ -76,6 +73,8 @@ public class Fixtures {
     public static final Position H6 = new Position(File.H, Rank.SIX);
     public static final Position H7 = new Position(File.H, Rank.SEVEN);
     public static final Position H8 = new Position(File.H, Rank.EIGHT);
+    public static final Obstacle EMPTY_OBSTACLE = new Obstacle(List.of());
+    public static final Piece EMPTY_PIECE = new Piece(PieceType.EMPTY, Color.NONE);
 
     private Fixtures() {
     }

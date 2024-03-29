@@ -1,14 +1,18 @@
 package chess.domain.board;
 
+import chess.domain.Obstacle;
 import chess.domain.piece.Color;
-import chess.domain.piece.Empty;
 import chess.domain.piece.Piece;
+import chess.domain.piece.PieceType;
 import chess.domain.position.Position;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class Board {
-    private static final Empty EMPTY = new Empty();
+
+    private static final Piece EMPTY_PIECE = new Piece(PieceType.EMPTY, Color.NONE);
 
     private final Map<Position, Piece> board;
 
@@ -20,10 +24,10 @@ public class Board {
         Piece piece = board.get(source);
         validateEmpty(source);
         validateColorTurn(piece, color);
-        validateMovement(source, target, piece);
+        validateMovement(source, target);
 
         board.put(target, piece);
-        board.put(source, EMPTY);
+        board.put(source, EMPTY_PIECE);
 
         return new Board(board);
     }
@@ -40,10 +44,34 @@ public class Board {
         }
     }
 
-    private void validateMovement(Position source, Position target, Piece piece) {
-        if (!piece.canMove(source, target, getBoard())) {
-            throw new IllegalArgumentException("이동이 불가능한 위치입니다.");
+    private void validateMovement(Position source, Position target) {
+        Piece sourcePiece = board.get(source);
+        Piece targetPiece = board.get(target);
+        validateSameColorPiece(sourcePiece, targetPiece);
+        if (!canAttack(source, target, sourcePiece) && !canMove(source, target, sourcePiece)) {
+            throw new IllegalArgumentException("해당 말로 이동할 수 없는 위치입니다.");
         }
+    }
+
+    private void validateSameColorPiece(Piece sourcePiece, Piece targetPiece) {
+        if (sourcePiece.isSameColor(targetPiece.getColor())) {
+            throw new IllegalArgumentException("같은 색상의 말의 위치로 이동시킬 수 없습니다.");
+        }
+    }
+
+    private boolean canMove(Position source, Position target, Piece sourcePiece) {
+        return sourcePiece.canMove(source, target, new Obstacle(getBoardPositions()));
+    }
+
+    private boolean canAttack(Position source, Position target, Piece sourcePiece) {
+        return sourcePiece.canAttack(source, target, new Obstacle(getBoardPositions()));
+    }
+
+    private List<Position> getBoardPositions() {
+        return board.entrySet().stream()
+                .filter(position -> !position.getValue().isEmpty())
+                .map(Entry::getKey)
+                .toList();
     }
 
     public Map<Position, Piece> getBoard() {
