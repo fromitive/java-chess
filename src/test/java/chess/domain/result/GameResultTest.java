@@ -8,8 +8,8 @@ import static chess.domain.Fixtures.D7;
 import static chess.domain.Fixtures.F2;
 import static chess.domain.Fixtures.F3;
 import static chess.domain.Fixtures.F4;
-import static chess.domain.Fixtures.G4;
 import static chess.domain.Fixtures.H3;
+import static chess.domain.Fixtures.H4;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
@@ -26,17 +26,15 @@ import org.junit.jupiter.api.Test;
 class GameResultTest {
 
     //abcdefgh
-    //.KR..... - 8 (5, 0)
-    //P.PB.... - 7 (4, 0)
-    //........ - 6 (0, 0)
-    //........ - 5 (0, 0)
-    //.....nq. - 4 (0, 11.5)
-    //.....p.p - 3 (0, 1)
-    //.....k.. - 2 (0, 0)
+    //.KR..... - 8
+    //P.PB.... - 7
+    //........ - 6
+    //........ - 5
+    //.....n.p - 4
+    //.....p.p - 3
+    //.....k.. - 2
     //........ - 1
-    //              점수
-    //              b  w
-    //              9  12.5
+    //
 
     private static final Board GIVEN_BOARD = new Board(
             Map.of(
@@ -46,10 +44,10 @@ class GameResultTest {
                     C7, Pawn.of(Color.BLACK),
                     D7, Piece.of(PieceType.BISHOP, Color.BLACK),
                     F4, Piece.of(PieceType.KNIGHT, Color.WHITE),
-                    G4, Piece.of(PieceType.QUEEN, Color.WHITE),
+                    H4, Pawn.of(Color.WHITE),
                     F3, Pawn.of(Color.WHITE),
                     H3, Pawn.of(Color.WHITE),
-                    F2, Piece.of(PieceType.KING, Color.BLACK)
+                    F2, Piece.of(PieceType.KING, Color.WHITE)
             ));
 
     @Test
@@ -60,8 +58,8 @@ class GameResultTest {
 
         //when, then
         assertAll(
-                () -> assertThat(gameResult.calcuateScore(GIVEN_BOARD, Color.WHITE)).isEqualTo(new Score(12.5)),
-                () -> assertThat(gameResult.calcuateScore(GIVEN_BOARD, Color.BLACK)).isEqualTo(new Score(9))
+                () -> assertThat(gameResult.calcuateScore(GIVEN_BOARD, Color.WHITE)).isEqualTo(new Score(4.5)),
+                () -> assertThat(gameResult.calcuateScore(GIVEN_BOARD, Color.BLACK)).isEqualTo(new Score(10))
         );
     }
 

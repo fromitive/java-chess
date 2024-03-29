@@ -34,14 +34,14 @@ public class GameResult {
 
     public Score calcuateScore(Board board, Color color) {
         Map<Position, Piece> positions = board.getBoard();
-        return Arrays.stream(Rank.values())
-                .map(rank -> calculateRankScore(positions, rank, color))
+        return Arrays.stream(File.values())
+                .map(file -> calculateFileScore(positions, file, color))
                 .reduce(Score.ZERO, Score::add);
     }
 
-    private Score calculateRankScore(Map<Position, Piece> positions, Rank rank, Color color) {
-        List<Piece> pieces = Arrays.stream(File.values())
-                .map(file -> positions.getOrDefault(Position.of(file, rank), Piece.EMPTY_PIECE))
+    private Score calculateFileScore(Map<Position, Piece> positions, File file, Color color) {
+        List<Piece> pieces = Arrays.stream(Rank.values())
+                .map(rank -> positions.getOrDefault(Position.of(file, rank), Piece.EMPTY_PIECE))
                 .filter(piece -> piece.isSameColor(color))
                 .toList();
         return calculateScore(pieces);
@@ -57,7 +57,7 @@ public class GameResult {
 
     private Score calculatePawnScore(List<Piece> pieces) {
         int pawnCount = calculatePawnCount(pieces);
-        if (calculatePawnCount(pieces) > 0) {
+        if (calculatePawnCount(pieces) > 1) {
             return new Score(pawnCount).multiply(0.5);
         }
         return Score.ZERO;
