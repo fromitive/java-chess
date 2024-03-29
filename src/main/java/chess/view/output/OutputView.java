@@ -6,7 +6,9 @@ import chess.domain.piece.Piece;
 import chess.domain.position.File;
 import chess.domain.position.Position;
 import chess.domain.position.Rank;
+import chess.domain.result.Score;
 import chess.view.input.command.GameCommand;
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
@@ -14,9 +16,9 @@ import java.util.stream.Collectors;
 
 public class OutputView {
 
-    private static final String WHITE_COLOR = "흰색";
-    private static final String BLACK_COLOR = "검은색";
     private static final String WINNER_FORMAT = "%s이 이겼습니다!";
+    private static final String GAME_RESULT_FORMAT = "흰색 : %s점 검은색 : %s점 - 현재 유리한 팀 : %s";
+    private static final DecimalFormat SCORE_FORMAT = new DecimalFormat("#");
 
     public void printBoard(final Board board) {
         Map<Position, Piece> positions = board.getBoard();
@@ -46,11 +48,18 @@ public class OutputView {
     }
 
     public void printWinnerColor(Color color) {
-        if (color == Color.WHITE) {
-            System.out.println(WINNER_FORMAT.formatted(WHITE_COLOR));
-        }
-        if (color == Color.BLACK) {
-            System.out.println(WINNER_FORMAT.formatted(BLACK_COLOR));
-        }
+        ColorSymbol colorSymbol = ColorSymbol.getColorSymbol(color);
+        System.out.println(WINNER_FORMAT.formatted(colorSymbol.getSymbol()));
+    }
+
+    public void printGameResult(Score whiteScore, Score blackScore, Color color) {
+        ColorSymbol colorSymbol = ColorSymbol.getColorSymbol(color);
+        System.out.println(
+                GAME_RESULT_FORMAT.formatted(applyFormat(whiteScore), applyFormat(blackScore),
+                        colorSymbol.getSymbol()));
+    }
+
+    private String applyFormat(Score score) {
+        return SCORE_FORMAT.format(score.getValue());
     }
 }
