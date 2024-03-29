@@ -3,7 +3,6 @@ package chess.domain.board;
 import chess.domain.Obstacle;
 import chess.domain.piece.Color;
 import chess.domain.piece.Piece;
-import chess.domain.piece.PieceType;
 import chess.domain.position.Position;
 import java.util.Collections;
 import java.util.List;
@@ -11,8 +10,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class Board {
-
-    private static final Piece EMPTY_PIECE = new Piece(PieceType.EMPTY, Color.NONE);
 
     private final Map<Position, Piece> board;
 
@@ -27,7 +24,7 @@ public class Board {
         validateMovement(source, target);
 
         board.put(target, piece);
-        board.put(source, EMPTY_PIECE);
+        board.put(source, Piece.EMPTY_PIECE);
 
         return new Board(board);
     }
@@ -59,12 +56,12 @@ public class Board {
         }
     }
 
-    private boolean canMove(Position source, Position target, Piece sourcePiece) {
-        return sourcePiece.canMove(source, target, new Obstacle(getBoardPositions()));
-    }
-
     private boolean canAttack(Position source, Position target, Piece sourcePiece) {
         return sourcePiece.canAttack(source, target, new Obstacle(getBoardPositions()));
+    }
+
+    private boolean canMove(Position source, Position target, Piece sourcePiece) {
+        return sourcePiece.canMove(source, target, new Obstacle(getBoardPositions()));
     }
 
     private List<Position> getBoardPositions() {
