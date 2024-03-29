@@ -13,6 +13,6 @@ public enum Color {
         if (this == Color.WHITE) {
             return Color.BLACK;
         }
-        return Color.NONE;
+        throw new IllegalArgumentException("색깔이 존재하지 않아 보색을 반환할 수 없습니다.");
     }
 }

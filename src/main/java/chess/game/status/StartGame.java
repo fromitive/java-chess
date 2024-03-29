@@ -6,7 +6,8 @@ import chess.domain.piece.Color;
 import chess.view.input.InputView;
 import chess.view.output.OutputView;
 
-public class RestartGame implements GameStatus {
+public class StartGame implements GameStatus {
+
     private static final Color FIRST_TURN_COLOR = Color.WHITE;
 
     @Override

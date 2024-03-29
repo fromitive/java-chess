@@ -1,16 +1,11 @@
 package chess.game.status;
 
-import chess.domain.board.Board;
-import chess.domain.board.BoardFactory;
-import chess.domain.piece.Color;
 import chess.view.input.InputView;
 import chess.view.input.command.ClientCommand;
 import chess.view.input.command.GameCommand;
 import chess.view.output.OutputView;
 
 public class InitialGame implements GameStatus {
-
-    private static final Color FIRST_TURN_COLOR = Color.WHITE;
 
     @Override
     public boolean isPlayable() {
@@ -25,9 +20,7 @@ public class InitialGame implements GameStatus {
     private GameStatus applyCommand(final ClientCommand clientCommand, final OutputView outputView) {
         GameCommand gameCommand = clientCommand.getCommand();
         if (gameCommand == GameCommand.START) {
-            Board board = BoardFactory.create();
-            outputView.printBoard(board);
-            return new PlayingGame(board, FIRST_TURN_COLOR);
+            return new StartGame();
         }
         if (gameCommand == GameCommand.END) {
             return new TerminateGame();

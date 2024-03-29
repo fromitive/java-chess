@@ -30,7 +30,7 @@ public class PlayingGame implements GameStatus {
     private GameStatus applyCommand(final ClientCommand clientCommand, final OutputView outputView) {
         GameCommand gameCommand = clientCommand.getCommand();
         if (gameCommand == GameCommand.START) {
-            return new RestartGame();
+            return new StartGame();
         }
         if (gameCommand == GameCommand.MOVE) {
             return movePiece(clientCommand.getMovePath(), outputView);
