@@ -43,6 +43,9 @@ public class PlayingGame implements GameStatus {
 
     private GameStatus movePiece(final MovePath movePath, OutputView outputView) {
         Board board = this.board.move(movePath.from(), movePath.to(), color);
+        if (board.isKingAlone()) {
+            return new EndGame(board);
+        }
         outputView.printBoard(board);
         return new PlayingGame(board, color.opposite());
     }
