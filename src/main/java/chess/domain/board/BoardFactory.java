@@ -36,7 +36,7 @@ public class BoardFactory {
 
     private static Stream<Position> generateHorizontalLine(final Rank rank) {
         return Arrays.stream(File.values())
-                .map(file -> new Position(file, rank));
+                .map(file -> Position.of(file, rank));
     }
 
     private static Collector<Position, ?, Map<Position, Piece>> generateEntry() {
@@ -58,18 +58,18 @@ public class BoardFactory {
     }
 
     private static Map<Position, Piece> getNotPawnsPieces(final Color color, final Rank rank) {
-        return Map.of(new Position(File.A, rank), Piece.of(PieceType.ROOK, color),
-                new Position(File.B, rank), Piece.of(PieceType.KNIGHT, color),
-                new Position(File.C, rank), Piece.of(PieceType.BISHOP, color),
-                new Position(File.D, rank), Piece.of(PieceType.QUEEN, color),
-                new Position(File.E, rank), Piece.of(PieceType.KING, color),
-                new Position(File.F, rank), Piece.of(PieceType.BISHOP, color),
-                new Position(File.G, rank), Piece.of(PieceType.KNIGHT, color),
-                new Position(File.H, rank), Piece.of(PieceType.ROOK, color));
+        return Map.of(Position.of(File.A, rank), Piece.of(PieceType.ROOK, color),
+                Position.of(File.B, rank), Piece.of(PieceType.KNIGHT, color),
+                Position.of(File.C, rank), Piece.of(PieceType.BISHOP, color),
+                Position.of(File.D, rank), Piece.of(PieceType.QUEEN, color),
+                Position.of(File.E, rank), Piece.of(PieceType.KING, color),
+                Position.of(File.F, rank), Piece.of(PieceType.BISHOP, color),
+                Position.of(File.G, rank), Piece.of(PieceType.KNIGHT, color),
+                Position.of(File.H, rank), Piece.of(PieceType.ROOK, color));
     }
 
     private static Map<Position, Piece> getPawnsPieces(final Color color, final Rank rank) {
         return Arrays.stream(File.values())
-                .collect(Collectors.toMap(file -> new Position(file, rank), file -> Pawn.of(color)));
+                .collect(Collectors.toMap(file -> Position.of(file, rank), file -> Pawn.of(color)));
     }
 }

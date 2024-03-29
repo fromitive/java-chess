@@ -20,7 +20,7 @@ public class OutputView {
 
     private void printRankLine(final Map<Position, Piece> positions, final Rank rank) {
         String rankLine = Arrays.stream(File.values())
-                .map(file -> positions.get(new Position(file, rank)))
+                .map(file -> positions.get(Position.of(file, rank)))
                 .map(PieceSymbol::getDisplay)
                 .collect(Collectors.joining(""));
         System.out.println(rankLine);

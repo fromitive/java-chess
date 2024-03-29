@@ -13,6 +13,6 @@ public class RightDirection extends SlidingDirection {
         if (position.isMaximumFile()) {
             return position;
         }
-        return new Position(position.file().move(1), position.rank());
+        return Position.of(position.file().move(1), position.rank());
     }
 }

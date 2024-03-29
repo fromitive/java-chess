@@ -16,6 +16,6 @@ public class PositionConverter {
         String rank = position.substring(1, 2);
         FileSymbol fileSymbol = FileSymbol.getFileSymbol(file);
         RankSymbol rankSymbol = RankSymbol.getRankSymbol(rank);
-        return new Position(fileSymbol.getFile(), rankSymbol.getRank());
+        return Position.of(fileSymbol.getFile(), rankSymbol.getRank());
     }
 }

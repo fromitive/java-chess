@@ -114,7 +114,7 @@ class BoardFactoryTest {
         Map<Position, Piece> initialPiecePositions = board.getBoard();
         Arrays.stream(Rank.values())
                 .filter(rank -> !List.of(Rank.ONE, Rank.TWO, Rank.SEVEN, Rank.EIGHT).contains(rank))
-                .flatMap(rank -> Arrays.stream(File.values()).map(file -> new Position(file, rank)))
+                .flatMap(rank -> Arrays.stream(File.values()).map(file -> Position.of(file, rank)))
                 .forEach(position -> assertThat(initialPiecePositions.get(position)).isEqualTo(Piece.EMPTY_PIECE));
     }
 }

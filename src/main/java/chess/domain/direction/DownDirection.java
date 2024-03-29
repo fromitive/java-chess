@@ -13,6 +13,6 @@ public class DownDirection extends SlidingDirection {
         if (position.isMinimumRank()) {
             return position;
         }
-        return new Position(position.file(), position.rank().move(-1));
+        return Position.of(position.file(), position.rank().move(-1));
     }
 }

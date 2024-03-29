@@ -13,6 +13,6 @@ public class LeftDirection extends SlidingDirection {
         if (position.isMinimumFile()) {
             return position;
         }
-        return new Position(position.file().move(-1), position.rank());
+        return Position.of(position.file().move(-1), position.rank());
     }
 }
