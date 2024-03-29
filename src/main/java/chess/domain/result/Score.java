@@ -31,6 +31,10 @@ public class Score {
         return new Score(value * ratio);
     }
 
+    public Boolean isGraterThan(Score score) {
+        return value > score.value;
+    }
+
     public double getValue() {
         return value;
     }
