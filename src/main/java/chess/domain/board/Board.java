@@ -2,6 +2,7 @@ package chess.domain.board;
 
 import chess.domain.piece.Color;
 import chess.domain.piece.Piece;
+import chess.domain.piece.PieceType;
 import chess.domain.position.Obstacle;
 import chess.domain.position.Position;
 import java.util.Collections;
@@ -62,6 +63,16 @@ public class Board {
 
     private boolean canMove(Position source, Position target, Piece sourcePiece) {
         return sourcePiece.canMove(source, target, new Obstacle(getNonEmptyPiecePosition()));
+    }
+
+    public boolean isKingAlone() {
+        return calculateKingCount() < 2;
+    }
+
+    private int calculateKingCount() {
+        return (int) board.values().stream()
+                .filter(piece -> piece.getPieceType() == PieceType.KING)
+                .count();
     }
 
     private List<Position> getNonEmptyPiecePosition() {
