@@ -42,7 +42,7 @@ public class Position {
     }
 
     public boolean isNextPositionInRange(final Vector vector) {
-        return file.canMoveNext(vector.getFileVector()) && file.canMoveNext(vector.getRankVector());
+        return file.canMoveNext(vector.getFileVector()) && rank.canMoveNext(vector.getRankVector());
     }
 
     public File file() {
@@ -68,5 +68,13 @@ public class Position {
     @Override
     public int hashCode() {
         return Objects.hash(file, rank);
+    }
+
+    @Override
+    public String toString() {
+        return "Position{" +
+                "file=" + file +
+                ", rank=" + rank +
+                '}';
     }
 }
