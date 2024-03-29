@@ -13,6 +13,25 @@ import java.util.Map;
 
 public class GameResult {
 
+    public Color getWinnerColor(Board board) {
+        if (board.isKingAlone()) {
+            return board.getAloneKingColor();
+        }
+        return calculateColor(board);
+    }
+
+    private Color calculateColor(Board board) {
+        Score whiteScore = calcuateScore(board, Color.WHITE);
+        Score blackScore = calcuateScore(board, Color.BLACK);
+        if (whiteScore.isGraterThan(blackScore)) {
+            return Color.WHITE;
+        }
+        if (blackScore.isGraterThan(whiteScore)) {
+            return Color.BLACK;
+        }
+        return Color.NONE;
+    }
+
     public Score calcuateScore(Board board, Color color) {
         Map<Position, Piece> positions = board.getBoard();
         return Arrays.stream(Rank.values())
