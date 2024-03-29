@@ -106,4 +106,37 @@ class BoardTest {
         //when, then
         assertThat(board.isKingAlone()).isTrue();
     }
+
+    @Test
+    @DisplayName("보드에 하나의 킹만 존재하면 해당 킹의 색깔을 반환한다.")
+    void Given_BoardWithOnColorKing_When_getAloneKingColor_Then_ReturnColor() {
+        //given
+        Board board = new Board(
+                Map.of(A1, Piece.of(PieceType.KING, Color.BLACK)));
+        //when, then
+        assertThat(board.getAloneKingColor()).isEqualTo(Color.BLACK);
+    }
+
+    @Test
+    @DisplayName("보드에 두개의 킹이 존재하는 상태에서 킹의 색깔을 반환하려 하면 예외가 발생한다.")
+    void Given_BoardWithTwoColorKing_When_getAloneKingColor_Then_Exception() {
+        //given
+        Board board = new Board(
+                Map.of(A1, Piece.of(PieceType.KING, Color.BLACK), A2, Piece.of(PieceType.KING, Color.WHITE)));
+        //when, then
+        assertThatThrownBy(board::getAloneKingColor)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("두 킹이 존재하고 있습니다.");
+    }
+
+    @Test
+    @DisplayName("보드에 두개의 킹이 존재지 않는하는 상태에서 킹의 색깔을 반환하려 하면 예외가 발생한다.")
+    void Given_EmptyBoard_When_getAloneKingColor_Then_Exception() {
+        //given
+        Board board = new Board(Map.of());
+        //when, then
+        assertThatThrownBy(board::getAloneKingColor)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("두 킹이 존재하지 않습니다.");
+    }
 }

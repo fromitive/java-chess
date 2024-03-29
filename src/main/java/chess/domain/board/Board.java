@@ -85,4 +85,19 @@ public class Board {
     public Map<Position, Piece> getBoard() {
         return Collections.unmodifiableMap(board);
     }
+
+    public Color getAloneKingColor() {
+        if (isKingAlone()) {
+            return findKingColor();
+        }
+        throw new IllegalArgumentException("두 킹이 존재하고 있습니다.");
+    }
+
+    private Color findKingColor() {
+        return board.values().stream()
+                .filter(piece -> piece.getPieceType() == PieceType.KING)
+                .map(Piece::getColor)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("두 킹이 존재하지 않습니다."));
+    }
 }
