@@ -21,10 +21,6 @@ public class OutputView {
     private static final DecimalFormat SCORE_FORMAT = new DecimalFormat("#");
     private static final String SAVE_SUCCESS = "성공적으로 게임이 저장 되었습니다.";
 
-    public static void printSave() {
-        System.out.println(SAVE_SUCCESS);
-    }
-
     public void printBoard(final Board board) {
         Map<Position, Piece> positions = board.getBoard();
         Arrays.stream(Rank.values()).sorted(Collections.reverseOrder()).forEach(rank -> printRankLine(positions, rank));
@@ -66,5 +62,9 @@ public class OutputView {
 
     private String applyFormat(Score score) {
         return SCORE_FORMAT.format(score.getValue());
+    }
+
+    public void printSave() {
+        System.out.println(SAVE_SUCCESS);
     }
 }

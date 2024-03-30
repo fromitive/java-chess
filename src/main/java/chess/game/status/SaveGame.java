@@ -24,7 +24,7 @@ public class SaveGame implements GameStatus {
     @Override
     public GameStatus play(InputView inputView, OutputView outputView, ChessService chessService) {
         chessService.saveChess(board, color);
-        OutputView.printSave();
+        outputView.printSave();
         return new TerminateGame();
     }
 }
