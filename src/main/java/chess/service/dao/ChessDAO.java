@@ -14,4 +14,6 @@ public interface ChessDAO {
     void updateBoard(Board board);
 
     void updateColor(Color color);
+
+    void initialize();
 }

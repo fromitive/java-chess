@@ -3,10 +3,10 @@ package chess.service;
 import static chess.domain.Fixtures.A1;
 import static chess.domain.Fixtures.B2;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import chess.domain.board.Board;
-import chess.domain.board.BoardFactory;
 import chess.domain.piece.Color;
 import chess.domain.piece.Piece;
 import chess.domain.piece.PieceType;
@@ -15,6 +15,7 @@ import chess.domain.position.Position;
 import chess.domain.position.Rank;
 import chess.service.dao.ChessDAO;
 import chess.service.dto.ChessDTO;
+import chess.view.output.OutputView;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -45,9 +46,13 @@ class ChessServiceTest {
             @Override
             public void updateColor(Color color) {
             }
+
+            @Override
+            public void initialize() {
+            }
         });
         //when
-        ChessDTO chessDTO = chessService.loadChess();
+        ChessDTO chessDTO = chessService.loadChess(new OutputView());
         Board board = chessDTO.board();
         Color color = chessDTO.color();
         //then
@@ -63,8 +68,8 @@ class ChessServiceTest {
     }
 
     @Test
-    @DisplayName("진행 중인 체스 게임을 불러올 때 예외가 발생할 경우 초기 보드를 반환한다.")
-    void Given_ChessServiceWithTestChessDAO_When_LoadBoardException_Then_ThrowException() {
+    @DisplayName("진행 중인 체스 게임을 불러올 때 예외가 발생할 경우 RuntimeException을 발생시킨다.")
+    void Given_ChessServiceWithTestChessDAO_When_LoadBoardException_Then_RuntimeException() {
         //given
         ChessService chessService = new ChessService(new ChessDAO() {
             @Override
@@ -84,14 +89,11 @@ class ChessServiceTest {
             @Override
             public void updateColor(Color color) {
             }
+
+            @Override
+            public void initialize() {
+            }
         });
-        //when
-        ChessDTO chessDTO = chessService.loadChess();
-        Board board = chessDTO.board();
-        Color color = chessDTO.color();
-        assertAll(
-                () -> assertThat(board.getBoard()).isEqualTo(BoardFactory.create().getBoard()),
-                () -> assertThat(color).isEqualTo(Color.WHITE)
-        );
+        assertThatThrownBy(() -> chessService.loadChess(new OutputView())).isInstanceOf(RuntimeException.class);
     }
 }
