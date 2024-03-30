@@ -25,7 +25,7 @@ public class ChessService {
             board.putAll(chessDAO.getBoard());
             return new ChessDTO(new Board(board), chessDAO.getCurrentTurnColor());
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -35,12 +35,12 @@ public class ChessService {
                 .collect(Collectors.toMap(position -> position, position -> Piece.EMPTY_PIECE));
     }
 
-    void saveChess(Board board, Color color) {
+    public void saveChess(Board board, Color color) {
         chessDAO.updateBoard(board);
         chessDAO.updateColor(color);
     }
 
-    void initializeChess() {
+    public void initializeChess() {
         chessDAO.initialize();
     }
 }
