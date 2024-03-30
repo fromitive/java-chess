@@ -61,8 +61,7 @@ public class DatabaseChessDAO implements ChessDAO {
         }
         return board;
     }
-
-    //TODO: 현재 턴의 컬러를 구한다.
+    
     @Override
     public Color getCurrentTurnColor() {
         try (var statement = connection.prepareStatement(GET_CURRENT_TURN_COLOR_QUERY)) {
