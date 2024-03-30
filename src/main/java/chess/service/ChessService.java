@@ -8,7 +8,6 @@ import chess.domain.position.Position;
 import chess.domain.position.Rank;
 import chess.service.dao.ChessDAO;
 import chess.service.dto.ChessDTO;
-import chess.view.output.OutputView;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -20,7 +19,7 @@ public class ChessService {
         this.chessDAO = chessDAO;
     }
 
-    public ChessDTO loadChess(OutputView outputView) {
+    public ChessDTO loadChess() {
         Map<Position, Piece> board = generateEmptyBoard();
         try {
             board.putAll(chessDAO.getBoard());

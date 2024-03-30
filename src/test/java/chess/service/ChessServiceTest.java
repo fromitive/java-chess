@@ -15,7 +15,6 @@ import chess.domain.position.Position;
 import chess.domain.position.Rank;
 import chess.service.dao.ChessDAO;
 import chess.service.dto.ChessDTO;
-import chess.view.output.OutputView;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -52,7 +51,7 @@ class ChessServiceTest {
             }
         });
         //when
-        ChessDTO chessDTO = chessService.loadChess(new OutputView());
+        ChessDTO chessDTO = chessService.loadChess();
         Board board = chessDTO.board();
         Color color = chessDTO.color();
         //then
@@ -94,6 +93,6 @@ class ChessServiceTest {
             public void initialize() {
             }
         });
-        assertThatThrownBy(() -> chessService.loadChess(new OutputView())).isInstanceOf(RuntimeException.class);
+        assertThatThrownBy(chessService::loadChess).isInstanceOf(RuntimeException.class);
     }
 }
