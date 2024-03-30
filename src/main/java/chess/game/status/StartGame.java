@@ -1,8 +1,9 @@
 package chess.game.status;
 
-import chess.domain.board.Board;
 import chess.domain.board.BoardFactory;
 import chess.domain.piece.Color;
+import chess.service.ChessService;
+import chess.service.dto.ChessDTO;
 import chess.view.input.InputView;
 import chess.view.output.OutputView;
 
@@ -16,9 +17,19 @@ public class StartGame implements GameStatus {
     }
 
     @Override
-    public GameStatus play(final InputView inputView, final OutputView outputView) {
-        Board board = BoardFactory.create();
-        outputView.printBoard(board);
-        return new PlayingGame(board, FIRST_TURN_COLOR);
+    public GameStatus play(final InputView inputView, final OutputView outputView, ChessService chessService) {
+        ChessDTO chessDTO = loadFromExternal(outputView, chessService);
+        outputView.printBoard(chessDTO.board());
+        return new PlayingGame(chessDTO.board(), chessDTO.color());
+    }
+
+    private ChessDTO loadFromExternal(OutputView outputView, ChessService chessService) {
+        try {
+            return chessService.loadChess();
+        } catch (RuntimeException e) {
+            outputView.printErrorMessage(e.getMessage());
+            outputView.printErrorMessage("기본 보드로 시작합니다.");
+            return new ChessDTO(BoardFactory.create(), FIRST_TURN_COLOR);
+        }
     }
 }

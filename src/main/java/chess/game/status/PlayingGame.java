@@ -4,6 +4,7 @@ import chess.domain.board.Board;
 import chess.domain.piece.Color;
 import chess.domain.result.GameResult;
 import chess.domain.result.Score;
+import chess.service.ChessService;
 import chess.view.input.InputView;
 import chess.view.input.command.ClientCommand;
 import chess.view.input.command.GameCommand;
@@ -25,20 +26,17 @@ public class PlayingGame implements GameStatus {
     }
 
     @Override
-    public GameStatus play(InputView inputView, OutputView outputView) {
+    public GameStatus play(InputView inputView, OutputView outputView, ChessService chessService) {
         return applyCommand(inputView.getClientCommand(), outputView);
     }
 
     private GameStatus applyCommand(final ClientCommand clientCommand, final OutputView outputView) {
         GameCommand gameCommand = clientCommand.getCommand();
-        if (gameCommand == GameCommand.START) {
-            return new StartGame();
-        }
         if (gameCommand == GameCommand.MOVE) {
             return movePiece(clientCommand.getMovePath(), outputView);
         }
         if (gameCommand == GameCommand.END) {
-            return new TerminateGame();
+            return new SaveGame(board, color);
         }
         if (gameCommand == GameCommand.STATUS) {
             printCurrentStatus(outputView);

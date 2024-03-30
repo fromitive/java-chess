@@ -1,16 +1,19 @@
 package chess.game.status;
 
 import chess.domain.board.Board;
+import chess.domain.piece.Color;
 import chess.service.ChessService;
 import chess.view.input.InputView;
 import chess.view.output.OutputView;
 
-public class EndGame implements GameStatus {
+public class SaveGame implements GameStatus {
 
     private final Board board;
+    private final Color color;
 
-    public EndGame(Board board) {
+    public SaveGame(Board board, Color color) {
         this.board = board;
+        this.color = color;
     }
 
     @Override
@@ -20,12 +23,8 @@ public class EndGame implements GameStatus {
 
     @Override
     public GameStatus play(InputView inputView, OutputView outputView, ChessService chessService) {
-        outputView.printWinnerColor(board.getAloneKingColor());
-        initializeBoard(chessService);
+        chessService.saveChess(board, color);
+        OutputView.printSave();
         return new TerminateGame();
-    }
-
-    private void initializeBoard(ChessService chessService) {
-        chessService.initializeChess();
     }
 }

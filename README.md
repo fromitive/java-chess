@@ -2,7 +2,14 @@
 
 체스 미션 저장소
 
-# DB 연동 방법
+## DB 연동 방법
+
+`config` 디렉터리 내에 아래와 같은 설정 파일이 존재합니다.
+
+* `db/mysql/init/initialize.sql` - 체스 게임 테이블 스키마 및 초기화 데이터
+* `docker-compose.yml` - 도커 설정 파일
+
+## 빠른 연동
 
 ``` Bash
 cd config
@@ -141,10 +148,10 @@ docker-compose up -d
 
 ## DB 연동
 
-- [ ] Terminate() 명령어 입력 시 게임을 DB에 업데이트 한다.
-- [ ] Start 명령어 입력시 DB에 게임을 불러온다.
-    - [ ] DB에 자료가 없으면 새로운 게임을 생성한다.
-- [ ] EndGame()이 발생하면 DB의 기록을 지운다.
+- [x] `end` 명령어 입력 시 게임을 DB에 업데이트 한다.
+- [x] `start` 명령어 입력시 DB에 게임을 불러온다.
+    - [x] 실행 기록이 없으면 새로운 게임을 시작한다.
+- [x] 게임의 승패가 결정나면 기록을 제거한다.
 
 ## ChessService
 

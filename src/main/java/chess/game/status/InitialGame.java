@@ -1,5 +1,6 @@
 package chess.game.status;
 
+import chess.service.ChessService;
 import chess.view.input.InputView;
 import chess.view.input.command.ClientCommand;
 import chess.view.input.command.GameCommand;
@@ -13,7 +14,7 @@ public class InitialGame implements GameStatus {
     }
 
     @Override
-    public GameStatus play(final InputView inputView, final OutputView outputView) {
+    public GameStatus play(final InputView inputView, final OutputView outputView, ChessService chessService) {
         return applyCommand(inputView.getClientCommand(), outputView);
     }
 
