@@ -34,7 +34,7 @@ class DatabaseChessDAOTest {
         assertAll(
                 () -> assertThatThrownBy(DATABASE_CHESS_DAO::getBoard).isInstanceOf(RuntimeException.class)
                         .hasMessage("DB에 기존 게임에 대한 정보가 존재하지 않습니다."),
-                () -> assertThatThrownBy(DATABASE_CHESS_DAO::getColor).isInstanceOf(RuntimeException.class)
+                () -> assertThatThrownBy(DATABASE_CHESS_DAO::getCurrentTurnColor).isInstanceOf(RuntimeException.class)
                         .hasMessage("DB에 기존 게임에 대한 정보가 존재하지 않습니다.")
         );
     }
@@ -59,7 +59,7 @@ class DatabaseChessDAOTest {
         Color color = Color.BLACK;
         //when
         DATABASE_CHESS_DAO.updateColor(color);
-        Color actualColor = DATABASE_CHESS_DAO.getColor();
+        Color actualColor = DATABASE_CHESS_DAO.getCurrentTurnColor();
         //then
         assertThat(actualColor).isEqualTo(color);
     }

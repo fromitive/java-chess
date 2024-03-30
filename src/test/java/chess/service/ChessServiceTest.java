@@ -35,7 +35,7 @@ class ChessServiceTest {
             }
 
             @Override
-            public Color getColor() {
+            public Color getCurrentTurnColor() {
                 return Color.BLACK;
             }
 
@@ -78,7 +78,7 @@ class ChessServiceTest {
             }
 
             @Override
-            public Color getColor() {
+            public Color getCurrentTurnColor() {
                 throw new RuntimeException("외부에서 현재 턴의 색상을 가져오는데 실패했습니다.");
             }
 

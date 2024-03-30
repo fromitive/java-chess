@@ -9,7 +9,7 @@ import java.util.Map;
 public interface ChessDAO {
     Map<Position, Piece> getBoard();
 
-    Color getColor();
+    Color getCurrentTurnColor();
 
     void updateBoard(Board board);
 

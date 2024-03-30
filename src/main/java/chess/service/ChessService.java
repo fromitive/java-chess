@@ -24,7 +24,7 @@ public class ChessService {
         Map<Position, Piece> board = generateEmptyBoard();
         try {
             board.putAll(chessDAO.getBoard());
-            return new ChessDTO(new Board(board), chessDAO.getColor());
+            return new ChessDTO(new Board(board), chessDAO.getCurrentTurnColor());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
