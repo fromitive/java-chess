@@ -13,6 +13,12 @@ public class CombinationDirection implements Direction {
 
     @Override
     public boolean canReach(final Position source, final Position target, final Obstacle obstacle) {
-        return directions.stream().anyMatch(direction -> direction.canReach(source, target, obstacle));
+        return directions.stream()
+                .anyMatch(direction -> checkOneDirectionCanReach(source, target, obstacle, direction));
+    }
+
+    private boolean checkOneDirectionCanReach(final Position source, final Position target, final Obstacle obstacle,
+                                              final Direction direction) {
+        return direction.canReach(source, target, obstacle);
     }
 }

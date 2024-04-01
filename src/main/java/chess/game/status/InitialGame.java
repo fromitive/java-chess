@@ -14,7 +14,7 @@ public class InitialGame implements GameStatus {
     }
 
     @Override
-    public GameStatus play(final InputView inputView, final OutputView outputView, ChessService chessService) {
+    public GameStatus play(final InputView inputView, final OutputView outputView, final ChessService chessService) {
         return applyCommand(inputView.getClientCommand(), outputView);
     }
 

@@ -6,7 +6,7 @@ import chess.domain.position.Position;
 public class NoMoveDirection implements Direction {
 
     @Override
-    public boolean canReach(Position source, Position target, Obstacle obstacle) {
+    public boolean canReach(final Position source, final Position target, final Obstacle obstacle) {
         return false;
     }
 }

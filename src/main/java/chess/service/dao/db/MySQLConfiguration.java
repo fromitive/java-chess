@@ -16,7 +16,6 @@ public class MySQLConfiguration {
         try {
             return DriverManager.getConnection("jdbc:mysql://" + SERVER + "/" + DATABASE + OPTION, USERNAME, PASSWORD);
         } catch (final SQLException e) {
-            System.out.println(e.getMessage());
             throw new RuntimeException("DB에 연결하는 중 오류가 발생했습니다.");
         }
     }

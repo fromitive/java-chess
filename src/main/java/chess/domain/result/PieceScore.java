@@ -16,12 +16,12 @@ public enum PieceScore {
     private final PieceType pieceType;
     private final Score score;
 
-    PieceScore(PieceType pieceType, Score score) {
+    PieceScore(final PieceType pieceType, final Score score) {
         this.pieceType = pieceType;
         this.score = score;
     }
 
-    public static PieceScore getPieceScore(PieceType pieceType) {
+    public static PieceScore getPieceScore(final PieceType pieceType) {
         return Arrays.stream(PieceScore.values()).filter(pieceScore -> pieceScore.pieceType == pieceType)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("점수계산에 사용할 수 없는 체스 말 타입입니다."));

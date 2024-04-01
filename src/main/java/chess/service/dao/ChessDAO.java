@@ -11,9 +11,9 @@ public interface ChessDAO {
 
     Color getCurrentTurnColor();
 
-    void updateBoard(Board board);
+    void updateBoard(final Board board);
 
-    void updateColor(Color color);
+    void updateColor(final Color color);
 
     void initialize();
 }

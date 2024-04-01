@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class ChessService {
     private final ChessDAO chessDAO;
 
-    public ChessService(ChessDAO chessDAO) {
+    public ChessService(final ChessDAO chessDAO) {
         this.chessDAO = chessDAO;
     }
 
@@ -35,7 +35,7 @@ public class ChessService {
                 .collect(Collectors.toMap(position -> position, position -> Piece.EMPTY_PIECE));
     }
 
-    public void saveChess(Board board, Color color) {
+    public void saveChess(final Board board, final Color color) {
         chessDAO.updateBoard(board);
         chessDAO.updateColor(color);
     }

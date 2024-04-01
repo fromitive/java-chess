@@ -17,12 +17,12 @@ public enum RankSymbol {
     private final Rank rank;
     private final String symbol;
 
-    RankSymbol(Rank rank, String symbol) {
+    RankSymbol(final Rank rank, final String symbol) {
         this.rank = rank;
         this.symbol = symbol;
     }
 
-    public static RankSymbol getRankSymbol(String symbol) {
+    public static RankSymbol getRankSymbol(final String symbol) {
         return Arrays.stream(RankSymbol.values())
                 .filter(rankSymbol -> rankSymbol.symbol.equals(symbol))
                 .findFirst()
@@ -31,9 +31,5 @@ public enum RankSymbol {
 
     public Rank getRank() {
         return rank;
-    }
-
-    private String getSymbol() {
-        return symbol;
     }
 }

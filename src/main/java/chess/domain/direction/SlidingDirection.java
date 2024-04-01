@@ -13,10 +13,18 @@ abstract class SlidingDirection implements Direction {
     }
 
     public boolean canReach(final Position source, final Position target, final Obstacle obstacle) {
-        return Stream.iterate(next(source), now -> !obstacle.isBlocked(now, target), this::next)
+        return Stream.iterate(next(source), now -> isPassable(target, obstacle, now), this::next)
                 .limit(moveCount)
-                .anyMatch(position -> position.equals(target));
+                .anyMatch(position -> isReached(target, position));
     }
 
-    abstract Position next(Position position);
+    private boolean isPassable(final Position target, final Obstacle obstacle, final Position now) {
+        return !obstacle.isBlocked(now, target);
+    }
+
+    private boolean isReached(final Position target, final Position position) {
+        return position.equals(target);
+    }
+
+    abstract Position next(final Position position);
 }

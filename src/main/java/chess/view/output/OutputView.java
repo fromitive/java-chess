@@ -35,7 +35,7 @@ public class OutputView {
         System.out.println(rankLine);
     }
 
-    public void printErrorMessage(String message) {
+    public void printErrorMessage(final String message) {
         System.out.println(message);
     }
 
@@ -48,19 +48,19 @@ public class OutputView {
         System.out.println(commandMessage);
     }
 
-    public void printWinnerColor(Color color) {
+    public void printWinnerColor(final Color color) {
         ColorSymbol colorSymbol = ColorSymbol.getColorSymbol(color);
         System.out.println(WINNER_FORMAT.formatted(colorSymbol.getSymbol()));
     }
 
-    public void printGameResult(Score whiteScore, Score blackScore, Color color) {
+    public void printGameResult(final Score whiteScore, final Score blackScore, final Color color) {
         ColorSymbol colorSymbol = ColorSymbol.getColorSymbol(color);
         System.out.println(
                 GAME_RESULT_FORMAT.formatted(applyFormat(whiteScore), applyFormat(blackScore),
                         colorSymbol.getSymbol()));
     }
 
-    private String applyFormat(Score score) {
+    private String applyFormat(final Score score) {
         return SCORE_FORMAT.format(score.getValue());
     }
 

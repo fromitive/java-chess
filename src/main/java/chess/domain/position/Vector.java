@@ -12,7 +12,7 @@ public enum Vector {
     private final int fileVector;
     private final int rankVector;
 
-    Vector(int fileVector, int rankVector) {
+    Vector(final int fileVector, final int rankVector) {
         this.fileVector = fileVector;
         this.rankVector = rankVector;
     }

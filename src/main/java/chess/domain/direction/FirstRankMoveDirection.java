@@ -16,9 +16,13 @@ public class FirstRankMoveDirection implements Direction {
 
     @Override
     public boolean canReach(final Position source, final Position target, final Obstacle obstacle) {
-        if (source.rank().equals(startRank)) {
+        if (isStartRank(source)) {
             return direction.canReach(source, target, obstacle);
         }
         return false;
+    }
+
+    private boolean isStartRank(final Position source) {
+        return source.rank().equals(startRank);
     }
 }

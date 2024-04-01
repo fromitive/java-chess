@@ -7,5 +7,5 @@ import chess.view.output.OutputView;
 public interface GameStatus {
     boolean isPlayable();
 
-    GameStatus play(final InputView inputView, final OutputView outputView, ChessService chessService);
+    GameStatus play(final InputView inputView, final OutputView outputView, final ChessService chessService);
 }

@@ -13,14 +13,14 @@ import java.util.Map;
 
 public class GameResult {
 
-    public Color getWinnerColor(Board board) {
+    public Color getWinnerColor(final Board board) {
         if (board.isKingAlone()) {
             return board.getAloneKingColor();
         }
         return calculateColor(board);
     }
 
-    private Color calculateColor(Board board) {
+    private Color calculateColor(final Board board) {
         Score whiteScore = calcuateScore(board, Color.WHITE);
         Score blackScore = calcuateScore(board, Color.BLACK);
         if (whiteScore.isGraterThan(blackScore)) {
@@ -32,7 +32,7 @@ public class GameResult {
         return Color.NONE;
     }
 
-    public Score calcuateScore(Board board, Color color) {
+    public Score calcuateScore(final Board board, final Color color) {
         Map<Position, Piece> positions = board.getBoard();
         return Arrays.stream(File.values())
                 .map(file -> calculateFileScore(positions, file, color))
@@ -41,10 +41,18 @@ public class GameResult {
 
     private Score calculateFileScore(Map<Position, Piece> positions, File file, Color color) {
         List<Piece> pieces = Arrays.stream(Rank.values())
-                .map(rank -> positions.getOrDefault(Position.of(file, rank), Piece.EMPTY_PIECE))
+                .map(rank -> getExistPiece(positions, file, rank))
                 .filter(piece -> piece.isSameColor(color))
                 .toList();
         return calculateScore(pieces);
+    }
+
+    private Piece getExistPiece(final Map<Position, Piece> positions, final File file, final Rank rank) {
+        Position searchPosition = Position.of(file, rank);
+        if (positions.containsKey(searchPosition)) {
+            return positions.get(searchPosition);
+        }
+        return Piece.EMPTY_PIECE;
     }
 
     private Score calculateScore(List<Piece> pieces) {

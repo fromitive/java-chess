@@ -26,7 +26,7 @@ public class PlayingGame implements GameStatus {
     }
 
     @Override
-    public GameStatus play(InputView inputView, OutputView outputView, ChessService chessService) {
+    public GameStatus play(final InputView inputView, final OutputView outputView, final ChessService chessService) {
         return applyCommand(inputView.getClientCommand(), outputView);
     }
 
@@ -45,14 +45,14 @@ public class PlayingGame implements GameStatus {
         throw new IllegalArgumentException("현재 상태에서 지원하지 않는 명령어 입니다.");
     }
 
-    private void printCurrentStatus(OutputView outputView) {
+    private void printCurrentStatus(final OutputView outputView) {
         GameResult gameResult = new GameResult();
         Score whiteScore = gameResult.calcuateScore(board, Color.WHITE);
         Score blackScore = gameResult.calcuateScore(board, Color.BLACK);
         outputView.printGameResult(whiteScore, blackScore, gameResult.getWinnerColor(board));
     }
 
-    private GameStatus movePiece(final MovePath movePath, OutputView outputView) {
+    private GameStatus movePiece(final MovePath movePath, final OutputView outputView) {
         Board board = this.board.move(movePath.from(), movePath.to(), color);
         if (board.isKingAlone()) {
             return new EndGame(board);

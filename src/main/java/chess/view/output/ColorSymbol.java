@@ -12,12 +12,12 @@ public enum ColorSymbol {
     private final Color color;
     private final String symbol;
 
-    ColorSymbol(Color color, String symbol) {
+    ColorSymbol(final Color color, final String symbol) {
         this.color = color;
         this.symbol = symbol;
     }
 
-    public static ColorSymbol getColorSymbol(Color color) {
+    public static ColorSymbol getColorSymbol(final Color color) {
         return Arrays.stream(ColorSymbol.values())
                 .filter(colorSymbol -> colorSymbol.color == color)
                 .findFirst()

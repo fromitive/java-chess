@@ -17,13 +17,13 @@ public class StartGame implements GameStatus {
     }
 
     @Override
-    public GameStatus play(final InputView inputView, final OutputView outputView, ChessService chessService) {
+    public GameStatus play(final InputView inputView, final OutputView outputView, final ChessService chessService) {
         ChessDTO chessDTO = loadFromExternal(outputView, chessService);
         outputView.printBoard(chessDTO.board());
         return new PlayingGame(chessDTO.board(), chessDTO.color());
     }
 
-    private ChessDTO loadFromExternal(OutputView outputView, ChessService chessService) {
+    private ChessDTO loadFromExternal(final OutputView outputView, final ChessService chessService) {
         try {
             return chessService.loadChess();
         } catch (RuntimeException e) {

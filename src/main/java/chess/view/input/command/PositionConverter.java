@@ -11,7 +11,7 @@ public class PositionConverter {
         return new MovePath(convertPosition(from), convertPosition(to));
     }
 
-    private static Position convertPosition(String position) {
+    private static Position convertPosition(final String position) {
         String file = position.substring(0, 1);
         String rank = position.substring(1, 2);
         FileSymbol fileSymbol = FileSymbol.getFileSymbol(file);

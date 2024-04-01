@@ -54,7 +54,7 @@ public class Piece {
         return pieceType == PieceType.EMPTY;
     }
 
-    public boolean isSameColor(Color color) {
+    public boolean isSameColor(final Color color) {
         return this.color == color;
     }
 
@@ -67,7 +67,7 @@ public class Piece {
     }
 
     @Override
-    public boolean equals(final Object o) {
+    public boolean equals(Object o) {
         if (this == o) {
             return true;
         }

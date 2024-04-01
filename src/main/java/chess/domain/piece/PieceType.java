@@ -42,11 +42,11 @@ public enum PieceType {
         this.movementPolicy = movementPolicy;
     }
 
-    public boolean canAttack(Position source, Position target, Obstacle obstacle) {
+    public boolean canAttack(final Position source, final Position target, final Obstacle obstacle) {
         return movementPolicy.canAttack(source, target, obstacle);
     }
 
-    public boolean canMove(Position source, Position target, Obstacle obstacle) {
+    public boolean canMove(final Position source, final Position target, final Obstacle obstacle) {
         return movementPolicy.canMove(source, target, obstacle);
     }
 }

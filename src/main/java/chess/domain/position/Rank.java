@@ -11,7 +11,7 @@ public enum Rank {
     EIGHT,
     ;
 
-    public Rank move(int step) {
+    public Rank move(final int step) {
         if (canMoveNext(step)) {
             return Rank.values()[ordinal() + step];
         }
@@ -19,7 +19,7 @@ public enum Rank {
         throw new IllegalArgumentException("해당 랭크 위치로 이동할 수 없습니다.");
     }
 
-    public boolean canMoveNext(int step) {
+    public boolean canMoveNext(final int step) {
         int next = ordinal() + step;
         return next < File.values().length && next >= 0;
     }

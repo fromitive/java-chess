@@ -8,30 +8,30 @@ public class Score {
 
     private final double value;
 
-    public Score(double value) {
+    public Score(final double value) {
         validatePositive(value);
         this.value = value;
     }
 
-    private void validatePositive(double value) {
+    private void validatePositive(final double value) {
         if (value < 0) {
             throw new IllegalArgumentException("음수로 점수를 초기화 할 수 없습니다.");
         }
     }
 
-    public Score add(Score score) {
+    public Score add(final Score score) {
         return new Score(value + score.value);
     }
 
-    public Score subtract(Score score) {
+    public Score subtract(final Score score) {
         return new Score(value - score.value);
     }
 
-    public Score multiply(double ratio) {
+    public Score multiply(final double ratio) {
         return new Score(value * ratio);
     }
 
-    public Boolean isGraterThan(Score score) {
+    public Boolean isGraterThan(final Score score) {
         return value > score.value;
     }
 

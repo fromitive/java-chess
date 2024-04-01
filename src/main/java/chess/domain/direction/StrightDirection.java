@@ -6,7 +6,7 @@ import chess.domain.position.Position;
 public class StrightDirection implements Direction {
     private final CombinationDirection combinationDirection;
 
-    public StrightDirection(int moveCount) {
+    public StrightDirection(final int moveCount) {
         this.combinationDirection = new CombinationDirection(
                 new UpDirection(moveCount), new DownDirection(moveCount),
                 new LeftDirection(moveCount), new RightDirection(moveCount));

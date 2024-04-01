@@ -11,7 +11,7 @@ public class SaveGame implements GameStatus {
     private final Board board;
     private final Color color;
 
-    public SaveGame(Board board, Color color) {
+    public SaveGame(final Board board, final Color color) {
         this.board = board;
         this.color = color;
     }
@@ -22,7 +22,7 @@ public class SaveGame implements GameStatus {
     }
 
     @Override
-    public GameStatus play(InputView inputView, OutputView outputView, ChessService chessService) {
+    public GameStatus play(final InputView inputView, final OutputView outputView, final ChessService chessService) {
         chessService.saveChess(board, color);
         outputView.printSave();
         return new TerminateGame();
