@@ -19,13 +19,6 @@ import java.util.Map.Entry;
 
 public class DatabaseChessDAO implements ChessDAO {
 
-    private static final String GET_BOARD_QUERY = "SELECT `file`, `rank`, `color`, `piece_type` from `board`";
-    private static final String GET_CURRENT_TURN_COLOR_QUERY = "SELECT `color` from `current_turn_color`";
-    private static final String INSERT_BOARD_QUERY = "INSERT INTO `board` (`file`, `rank`, `piece_type`, `color`) VALUES (?, ?, ?, ?)";
-    private static final String INSERT_COLOR_TURN_QUERY = "INSERT INTO `current_turn_color` (`color`) VALUES (?)";
-    private static final String INITIALIZE_BOARD_QUERY = "DELETE FROM `board`";
-    private static final String INITIALIZE_COLOR_TURN_QUERY = "DELETE FROM `current_turn_color`";
-
     private final Connection connection;
 
     public DatabaseChessDAO(final Connection connection) {
@@ -34,7 +27,9 @@ public class DatabaseChessDAO implements ChessDAO {
 
     @Override
     public Map<Position, Piece> getBoard() {
-        try (var statement = connection.prepareStatement(GET_BOARD_QUERY)) {
+        final String query = "SELECT `file`, `rank`, `color`, `piece_type` from `board`";
+
+        try (var statement = connection.prepareStatement(query)) {
             var resultSet = statement.executeQuery();
             validateEmpty(resultSet);
             return buildBoard(resultSet);
@@ -64,7 +59,9 @@ public class DatabaseChessDAO implements ChessDAO {
 
     @Override
     public Color getCurrentTurnColor() {
-        try (var statement = connection.prepareStatement(GET_CURRENT_TURN_COLOR_QUERY)) {
+        final String query = "SELECT `color` from `current_turn_color`";
+
+        try (var statement = connection.prepareStatement(query)) {
             var resultSet = statement.executeQuery();
             validateEmpty(resultSet);
             resultSet.next();
@@ -77,8 +74,11 @@ public class DatabaseChessDAO implements ChessDAO {
 
     @Override
     public void updateBoard(final Board board) {
-        try (var statement = connection.prepareStatement(INSERT_BOARD_QUERY)) {
-            executeInitializeQuery(INITIALIZE_BOARD_QUERY);
+        String insertQuery = "INSERT INTO `board` (`file`, `rank`, `piece_type`, `color`) VALUES (?, ?, ?, ?)";
+        String initializeQuery = "DELETE FROM `board`";
+
+        try (var statement = connection.prepareStatement(insertQuery)) {
+            executeInitializeQuery(initializeQuery);
             board.getBoard().entrySet().stream()
                     .filter(this::isNotEmpty)
                     .forEach(entry -> addPieceIntoStatement(entry, statement));
@@ -118,8 +118,11 @@ public class DatabaseChessDAO implements ChessDAO {
 
     @Override
     public void updateColor(final Color color) {
-        try (var statement = connection.prepareStatement(INSERT_COLOR_TURN_QUERY)) {
-            executeInitializeQuery(INITIALIZE_COLOR_TURN_QUERY);
+        String insertQuery = "INSERT INTO `current_turn_color` (`color`) VALUES (?)";
+        String initializeQuery = "DELETE FROM `current_turn_color`";
+
+        try (var statement = connection.prepareStatement(insertQuery)) {
+            executeInitializeQuery(initializeQuery);
             ColorSymbol colorSymbol = ColorSymbol.getColorSymbolByColor(color);
             statement.setString(1, colorSymbol.getSymbol());
             statement.executeUpdate();
@@ -130,8 +133,11 @@ public class DatabaseChessDAO implements ChessDAO {
 
     @Override
     public void initialize() {
-        executeInitializeQuery(INITIALIZE_COLOR_TURN_QUERY);
-        executeInitializeQuery(INITIALIZE_BOARD_QUERY);
+        String initializeBoardQuery = "DELETE FROM `board`";
+        String initializeColorTurnQuery = "DELETE FROM `current_turn_color`";
+
+        executeInitializeQuery(initializeBoardQuery);
+        executeInitializeQuery(initializeColorTurnQuery);
     }
 
     private void executeInitializeQuery(final String query) {
