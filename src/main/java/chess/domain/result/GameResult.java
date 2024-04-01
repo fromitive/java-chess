@@ -44,7 +44,7 @@ public class GameResult {
         Map<Position, Piece> positions = board.getBoard();
         return Arrays.stream(File.values())
                 .map(file -> calculateFileScore(positions, file, color))
-                .reduce(Score.ZERO, Score::add);
+                .reduce(new Score(0), Score::add);
     }
 
     private Score calculateFileScore(Map<Position, Piece> positions, File file, Color color) {
@@ -66,7 +66,7 @@ public class GameResult {
     private Score calculateScore(List<Piece> pieces) {
         Score score = pieces.stream().map(piece -> PieceScore.getPieceScore(piece.getPieceType()))
                 .map(PieceScore::getScore)
-                .reduce(Score.ZERO, Score::add);
+                .reduce(new Score(0), Score::add);
 
         return score.subtract(calculatePawnScore(pieces));
     }
@@ -76,7 +76,7 @@ public class GameResult {
         if (calculatePawnCount(pieces) > MINIMUM_DISCOUNT_PAWN_COUNT) {
             return new Score(pawnCount).multiply(0.5);
         }
-        return Score.ZERO;
+        return new Score(0);
     }
 
     private int calculatePawnCount(List<Piece> pieces) {

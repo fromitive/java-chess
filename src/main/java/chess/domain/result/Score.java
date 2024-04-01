@@ -3,9 +3,7 @@ package chess.domain.result;
 import java.util.Objects;
 
 public class Score {
-
-    public static final Score ZERO = new Score(0.0);
-
+    
     private final double value;
 
     public Score(final double value) {
