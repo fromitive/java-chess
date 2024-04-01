@@ -9,8 +9,6 @@ import chess.view.output.OutputView;
 
 public class StartGame implements GameStatus {
 
-    private static final Color FIRST_TURN_COLOR = Color.WHITE;
-
     @Override
     public boolean isPlayable() {
         return true;
@@ -29,7 +27,7 @@ public class StartGame implements GameStatus {
         } catch (RuntimeException e) {
             outputView.printErrorMessage(e.getMessage());
             outputView.printErrorMessage("기본 보드로 시작합니다.");
-            return new ChessDTO(BoardFactory.create(), FIRST_TURN_COLOR);
+            return new ChessDTO(BoardFactory.create(), Color.FIRST_TURN_COLOR);
         }
     }
 }

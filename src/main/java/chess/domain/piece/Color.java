@@ -1,11 +1,13 @@
 package chess.domain.piece;
 
 public enum Color {
-    
+
     BLACK,
     WHITE,
     NONE,
     ;
+
+    public static final Color FIRST_TURN_COLOR = Color.WHITE;
 
     public Color opposite() {
         if (this == Color.BLACK) {
