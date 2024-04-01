@@ -18,7 +18,7 @@ public class OutputView {
 
     private static final String WINNER_FORMAT = "%s이 이겼습니다!";
     private static final String GAME_RESULT_FORMAT = "흰색 : %s점 검은색 : %s점 - 현재 유리한 팀 : %s";
-    private static final DecimalFormat SCORE_FORMAT = new DecimalFormat("#");
+    private static final DecimalFormat SCORE_FORMAT = new DecimalFormat("0.##");
     private static final String SAVE_SUCCESS = "성공적으로 게임이 저장 되었습니다.";
 
     public void printBoard(final Board board) {
