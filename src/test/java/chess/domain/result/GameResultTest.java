@@ -55,7 +55,6 @@ class GameResultTest {
     void Given_GameResultWithBoard_When_CalculateScore_Then_ReturnScore() {
         //given
         GameResult gameResult = new GameResult();
-
         //when, then
         assertAll(
                 () -> assertThat(gameResult.calcuateScore(GIVEN_BOARD, Color.WHITE)).isEqualTo(new Score(4.5)),
@@ -64,12 +63,33 @@ class GameResultTest {
     }
 
     @Test
-    @DisplayName("현재 이기고 있는 색상을 반환한다.")
-    void Given_GameResultWithBoard_When_getWinnerColor_Then_ReturnWinnerColor() {
+    @DisplayName("승부가 나지 않은 채 검은색 점수가 흰색보다 높으면 검은색을 반환한다.")
+    void Given_GameResultWithBoard_When_getWinnerColorBlackScoreGraterThanWhite_Then_ReturnBlackColor() {
         //given
         GameResult gameResult = new GameResult();
+        Board board = new Board(
+                Map.of(
+                        B8, Piece.of(PieceType.KING, Color.BLACK),
+                        H3, Pawn.of(Color.WHITE),
+                        F2, Piece.of(PieceType.KING, Color.WHITE)
+                ));
         //when, then
-        assertThat(gameResult.getWinnerColor(GIVEN_BOARD)).isEqualTo(Color.WHITE);
+        assertThat(gameResult.getWinnerColor(board)).isEqualTo(Color.WHITE);
+    }
+
+    @Test
+    @DisplayName("승부가 나지 않은 채 흰색 점수가 검은색보다 높으면 흰색을 반환한다.")
+    void Given_GameResultWithBoard_When_getWinnerColorWhiteScoreGraterThanBlack_Then_ReturnWhiteColor() {
+        //given
+        GameResult gameResult = new GameResult();
+        Board board = new Board(
+                Map.of(
+                        B8, Piece.of(PieceType.KING, Color.BLACK),
+                        F4, Piece.of(PieceType.ROOK, Color.WHITE),
+                        F2, Piece.of(PieceType.KING, Color.WHITE)
+                ));
+        //when, then
+        assertThat(gameResult.getWinnerColor(board)).isEqualTo(Color.WHITE);
     }
 
     @Test
