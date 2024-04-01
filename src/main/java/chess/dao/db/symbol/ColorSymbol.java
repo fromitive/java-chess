@@ -1,4 +1,4 @@
-package chess.service.dao.db.symbol;
+package chess.dao.db.symbol;
 
 import chess.domain.piece.Color;
 import java.util.Arrays;

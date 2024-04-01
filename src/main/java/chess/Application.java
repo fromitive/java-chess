@@ -1,9 +1,9 @@
 package chess;
 
+import chess.dao.db.DatabaseChessDAO;
+import chess.dao.db.MySQLConfiguration;
 import chess.game.ChessGame;
 import chess.service.ChessService;
-import chess.service.dao.db.DatabaseChessDAO;
-import chess.service.dao.db.MySQLConfiguration;
 import chess.view.input.InputView;
 import chess.view.output.OutputView;
 import java.sql.SQLException;

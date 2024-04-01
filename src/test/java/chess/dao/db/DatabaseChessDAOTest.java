@@ -1,4 +1,4 @@
-package chess.service.dao.db;
+package chess.dao.db;
 
 import static chess.domain.Fixtures.B8;
 import static chess.domain.Fixtures.F2;
@@ -6,12 +6,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+import chess.dao.ChessDAO;
 import chess.domain.board.Board;
 import chess.domain.piece.Color;
 import chess.domain.piece.Piece;
 import chess.domain.piece.PieceType;
 import chess.domain.position.Position;
-import chess.service.dao.ChessDAO;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

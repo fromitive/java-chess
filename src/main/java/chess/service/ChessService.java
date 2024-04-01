@@ -1,13 +1,13 @@
 package chess.service;
 
+import chess.dao.ChessDAO;
 import chess.domain.board.Board;
 import chess.domain.piece.Color;
 import chess.domain.piece.Piece;
 import chess.domain.position.File;
 import chess.domain.position.Position;
 import chess.domain.position.Rank;
-import chess.service.dao.ChessDAO;
-import chess.service.dto.ChessDTO;
+import chess.dto.ChessDTO;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;

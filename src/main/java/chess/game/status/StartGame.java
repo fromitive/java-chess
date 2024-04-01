@@ -2,8 +2,8 @@ package chess.game.status;
 
 import chess.domain.board.BoardFactory;
 import chess.domain.piece.Color;
+import chess.dto.ChessDTO;
 import chess.service.ChessService;
-import chess.service.dto.ChessDTO;
 import chess.view.input.InputView;
 import chess.view.output.OutputView;
 

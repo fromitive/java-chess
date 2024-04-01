@@ -1,14 +1,14 @@
-package chess.service.dao.db;
+package chess.dao.db;
 
+import chess.dao.ChessDAO;
+import chess.dao.db.symbol.ColorSymbol;
+import chess.dao.db.symbol.FileSymbol;
+import chess.dao.db.symbol.PieceSymbol;
+import chess.dao.db.symbol.RankSymbol;
 import chess.domain.board.Board;
 import chess.domain.piece.Color;
 import chess.domain.piece.Piece;
 import chess.domain.position.Position;
-import chess.service.dao.ChessDAO;
-import chess.service.dao.db.symbol.ColorSymbol;
-import chess.service.dao.db.symbol.FileSymbol;
-import chess.service.dao.db.symbol.PieceSymbol;
-import chess.service.dao.db.symbol.RankSymbol;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

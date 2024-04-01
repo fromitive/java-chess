@@ -1,4 +1,4 @@
-package chess.service.dao;
+package chess.dao;
 
 import chess.domain.board.Board;
 import chess.domain.piece.Color;
