@@ -22,6 +22,8 @@ public class ChessGame {
             gameStatus = gameStatus.play(inputView, outputView, chessService);
         } catch (IllegalArgumentException e) {
             outputView.printErrorMessage(e.getMessage());
+        } catch (RuntimeException e) {
+            System.out.println("발생함?");
         }
         return gameStatus;
     }

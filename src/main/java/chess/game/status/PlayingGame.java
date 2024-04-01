@@ -27,13 +27,14 @@ public class PlayingGame implements GameStatus {
 
     @Override
     public GameStatus play(final InputView inputView, final OutputView outputView, final ChessService chessService) {
-        return applyCommand(inputView.getClientCommand(), outputView);
+        return applyCommand(inputView.getClientCommand(), outputView, chessService);
     }
 
-    private GameStatus applyCommand(final ClientCommand clientCommand, final OutputView outputView) {
+    private GameStatus applyCommand(final ClientCommand clientCommand, final OutputView outputView,
+                                    final ChessService chessService) {
         GameCommand gameCommand = clientCommand.getCommand();
         if (gameCommand == GameCommand.MOVE) {
-            return movePiece(clientCommand.getMovePath(), outputView);
+            return movePiece(clientCommand.getMovePath(), outputView, chessService);
         }
         if (gameCommand == GameCommand.END) {
             return new SaveGame(board, color);
@@ -50,12 +51,14 @@ public class PlayingGame implements GameStatus {
         outputView.printGameResult(gameResult);
     }
 
-    private GameStatus movePiece(final MovePath movePath, final OutputView outputView) {
+    private GameStatus movePiece(final MovePath movePath, final OutputView outputView,
+                                 final ChessService chessService) {
         Board board = this.board.move(movePath.from(), movePath.to(), color);
         if (board.isKingAlone()) {
             return new EndGame(board);
         }
         outputView.printBoard(board);
+        chessService.saveChess(board, color);
         return new PlayingGame(board, color.opposite());
     }
 }
