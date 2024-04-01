@@ -40,6 +40,7 @@ public class PlayingGame implements GameStatus {
         }
         if (gameCommand == GameCommand.STATUS) {
             printCurrentStatus(outputView);
+            return this;
         }
         throw new IllegalArgumentException("현재 상태에서 지원하지 않는 명령어 입니다.");
     }
