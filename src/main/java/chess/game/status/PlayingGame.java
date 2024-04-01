@@ -3,7 +3,6 @@ package chess.game.status;
 import chess.domain.board.Board;
 import chess.domain.piece.Color;
 import chess.domain.result.GameResult;
-import chess.domain.result.Score;
 import chess.service.ChessService;
 import chess.view.input.InputView;
 import chess.view.input.command.ClientCommand;
@@ -12,7 +11,7 @@ import chess.view.input.command.MovePath;
 import chess.view.output.OutputView;
 
 public class PlayingGame implements GameStatus {
-    
+
     private final Board board;
     private final Color color;
 
@@ -47,10 +46,8 @@ public class PlayingGame implements GameStatus {
     }
 
     private void printCurrentStatus(final OutputView outputView) {
-        GameResult gameResult = new GameResult();
-        Score whiteScore = gameResult.calcuateScore(board, Color.WHITE);
-        Score blackScore = gameResult.calcuateScore(board, Color.BLACK);
-        outputView.printGameResult(whiteScore, blackScore, gameResult.getWinnerColor(board));
+        GameResult gameResult = new GameResult(board);
+        outputView.printGameResult(gameResult);
     }
 
     private GameStatus movePiece(final MovePath movePath, final OutputView outputView) {

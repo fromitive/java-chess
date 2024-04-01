@@ -12,10 +12,16 @@ import java.util.List;
 import java.util.Map;
 
 public class GameResult {
-    
+
     private static final int MINIMUM_DISCOUNT_PAWN_COUNT = 1;
 
-    public Color getWinnerColor(final Board board) {
+    private final Board board;
+
+    public GameResult(final Board board) {
+        this.board = board;
+    }
+
+    public Color getWinnerColor() {
         if (board.isKingAlone()) {
             return board.getAloneKingColor();
         }
@@ -23,8 +29,8 @@ public class GameResult {
     }
 
     private Color calculateColor(final Board board) {
-        Score whiteScore = calcuateScore(board, Color.WHITE);
-        Score blackScore = calcuateScore(board, Color.BLACK);
+        Score whiteScore = calcuateScore(Color.WHITE);
+        Score blackScore = calcuateScore(Color.BLACK);
         if (whiteScore.isGraterThan(blackScore)) {
             return Color.WHITE;
         }
@@ -34,7 +40,7 @@ public class GameResult {
         return Color.NONE;
     }
 
-    public Score calcuateScore(final Board board, final Color color) {
+    public Score calcuateScore(final Color color) {
         Map<Position, Piece> positions = board.getBoard();
         return Arrays.stream(File.values())
                 .map(file -> calculateFileScore(positions, file, color))

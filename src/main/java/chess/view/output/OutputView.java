@@ -6,6 +6,7 @@ import chess.domain.piece.Piece;
 import chess.domain.position.File;
 import chess.domain.position.Position;
 import chess.domain.position.Rank;
+import chess.domain.result.GameResult;
 import chess.domain.result.Score;
 import chess.view.input.command.GameCommand;
 import java.text.DecimalFormat;
@@ -53,11 +54,14 @@ public class OutputView {
         System.out.println(WINNER_FORMAT.formatted(colorSymbol.getSymbol()));
     }
 
-    public void printGameResult(final Score whiteScore, final Score blackScore, final Color color) {
-        ColorSymbol colorSymbol = ColorSymbol.getColorSymbol(color);
-        System.out.println(
-                GAME_RESULT_FORMAT.formatted(applyFormat(whiteScore), applyFormat(blackScore),
-                        colorSymbol.getSymbol()));
+    public void printGameResult(final GameResult gameResult) {
+        Color winnerColor = gameResult.getWinnerColor();
+        ColorSymbol colorSymbol = ColorSymbol.getColorSymbol(winnerColor);
+        Score blackScore = gameResult.calcuateScore(Color.BLACK);
+        Score whiteScore = gameResult.calcuateScore(Color.WHITE);
+
+        System.out.println(GAME_RESULT_FORMAT.formatted(applyFormat(whiteScore), applyFormat(blackScore),
+                colorSymbol.getSymbol()));
     }
 
     private String applyFormat(final Score score) {
