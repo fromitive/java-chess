@@ -60,13 +60,11 @@ public class Board {
     }
 
     public boolean isKingAlone() {
-        return calculateKingCount() < 2;
+        return isKingNotExist(Color.WHITE) || isKingNotExist(Color.BLACK);
     }
 
-    private int calculateKingCount() {
-        return (int) board.values().stream()
-                .filter(piece -> piece.getPieceType() == PieceType.KING)
-                .count();
+    private boolean isKingNotExist(Color color) {
+        return !board.containsValue(Piece.of(PieceType.KING, color));
     }
 
     private List<Position> getNonEmptyPiecePosition() {
