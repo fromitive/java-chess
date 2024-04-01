@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Map;
 
 public class GameResult {
+    
+    private static final int MINIMUM_DISCOUNT_PAWN_COUNT = 1;
 
     public Color getWinnerColor(final Board board) {
         if (board.isKingAlone()) {
@@ -65,7 +67,7 @@ public class GameResult {
 
     private Score calculatePawnScore(List<Piece> pieces) {
         int pawnCount = calculatePawnCount(pieces);
-        if (calculatePawnCount(pieces) > 1) {
+        if (calculatePawnCount(pieces) > MINIMUM_DISCOUNT_PAWN_COUNT) {
             return new Score(pawnCount).multiply(0.5);
         }
         return Score.ZERO;
