@@ -71,4 +71,8 @@ public class OutputView {
     public void printSave() {
         System.out.println(SAVE_SUCCESS);
     }
+
+    public void printRestartMessage() {
+        System.out.println("게임을 재 시작합니다.");
+    }
 }

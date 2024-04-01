@@ -43,6 +43,9 @@ public class PlayingGame implements GameStatus {
             printCurrentStatus(outputView);
             return this;
         }
+        if (gameCommand == GameCommand.START) {
+            return new RestartGame();
+        }
         throw new IllegalArgumentException("현재 상태에서 지원하지 않는 명령어 입니다.");
     }
 
