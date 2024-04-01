@@ -26,6 +26,6 @@ public class InitialGame implements GameStatus {
         if (gameCommand == GameCommand.END) {
             return new TerminateGame();
         }
-        throw new IllegalArgumentException("보드를 초기화 하지 않았습니다. start 명령어로 시작 할 수 있습니다.");
+        throw new IllegalArgumentException("start 명령어로 기존 게임을 진행할 수 있습니다. (기존 게임이 없을 경우 새로 시작합니다.)");
     }
 }
