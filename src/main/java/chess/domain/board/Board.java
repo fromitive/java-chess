@@ -46,7 +46,9 @@ public class Board {
         final Piece sourcePiece = board.get(source);
         final Piece targetPiece = board.get(target);
         validateSameColorPiece(sourcePiece, targetPiece);
-        if (!canAttack(source, target, sourcePiece) && !canMove(source, target, sourcePiece)) {
+        boolean canAttack = sourcePiece.canAttack(source, target, new Obstacle(getNonEmptyPiecePosition()));
+        boolean canMove = sourcePiece.canMove(source, target, new Obstacle(getNonEmptyPiecePosition()));
+        if (!canAttack && !canMove) {
             throw new IllegalArgumentException("해당 말로 이동할 수 없는 위치입니다.");
         }
     }
@@ -55,14 +57,6 @@ public class Board {
         if (sourcePiece.isSameColor(targetPiece.getColor())) {
             throw new IllegalArgumentException("같은 색상의 말의 위치로 이동시킬 수 없습니다.");
         }
-    }
-
-    private boolean canAttack(final Position source, final Position target, final Piece sourcePiece) {
-        return sourcePiece.canAttack(source, target, new Obstacle(getNonEmptyPiecePosition()));
-    }
-
-    private boolean canMove(final Position source, final Position target, final Piece sourcePiece) {
-        return sourcePiece.canMove(source, target, new Obstacle(getNonEmptyPiecePosition()));
     }
 
     public boolean isKingAlone() {
