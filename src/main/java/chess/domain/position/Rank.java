@@ -1,6 +1,7 @@
 package chess.domain.position;
 
 public enum Rank {
+    
     ONE,
     TWO,
     THREE,

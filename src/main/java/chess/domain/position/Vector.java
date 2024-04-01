@@ -1,6 +1,7 @@
 package chess.domain.position;
 
 public enum Vector {
+    
     UP_UP_RIGHT(1, 2),
     UP_UP_LEFT(-1, 2),
     DOWN_DOWN_RIGHT(1, -2),

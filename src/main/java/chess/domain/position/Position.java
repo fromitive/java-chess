@@ -12,6 +12,7 @@ public class Position {
         CACHED_POSITIONS = Arrays.stream(File.values())
                 .flatMap(file -> makePosition(file)).toList();
     }
+    
     File file;
     Rank rank;
 

@@ -11,13 +11,14 @@ import java.util.Objects;
 public class Piece {
 
     public static final Piece EMPTY_PIECE = new Piece(PieceType.EMPTY, Color.NONE);
-    private static final List<Piece> PIECE_LIST;
+    private static final List<Piece> CACHED_PIECES;
     static {
         List<Piece> pieces = new ArrayList<>(generateNormalPiece());
         pieces.add(new Piece(PieceType.WHITE_PAWN, Color.WHITE));
         pieces.add(new Piece(PieceType.BLACK_PAWN, Color.BLACK));
-        PIECE_LIST = Collections.unmodifiableList(pieces);
+        CACHED_PIECES = Collections.unmodifiableList(pieces);
     }
+
     private final PieceType pieceType;
     private final Color color;
 
@@ -36,7 +37,7 @@ public class Piece {
     }
 
     public static Piece of(final PieceType pieceType, final Color color) {
-        return PIECE_LIST.stream()
+        return CACHED_PIECES.stream()
                 .filter(piece -> piece.getPieceType() == pieceType && piece.getColor() == color)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("해당 타입과 색상으로 체스말을 생성할 수 없습니다."));

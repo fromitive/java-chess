@@ -5,6 +5,7 @@ import chess.domain.position.Position;
 import java.util.List;
 
 public class CombinationDirection implements Direction {
+
     private final List<Direction> directions;
 
     public CombinationDirection(final Direction... directions) {

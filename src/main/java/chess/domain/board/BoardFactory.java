@@ -15,9 +15,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class BoardFactory {
+
     private static final Rank WHITE_PIECE_START_RANK = Rank.ONE;
     private static final Rank WHITE_PAWN_START_RANK = Rank.TWO;
-
     private static final Rank BLACK_PIECE_START_RANK = Rank.EIGHT;
     private static final Rank BLACK_PAWN_START_RANK = Rank.SEVEN;
 

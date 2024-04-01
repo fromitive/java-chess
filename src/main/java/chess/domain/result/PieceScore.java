@@ -4,6 +4,7 @@ import chess.domain.piece.PieceType;
 import java.util.Arrays;
 
 public enum PieceScore {
+    
     KING(PieceType.KING, new Score(0)),
     QUEEN(PieceType.QUEEN, new Score(9)),
     KNIGHT(PieceType.KNIGHT, new Score(2.5)),

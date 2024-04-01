@@ -21,6 +21,7 @@ import chess.domain.position.Position;
 import chess.domain.position.Rank;
 
 public enum PieceType {
+    
     KING(new SameMovementPolicy(new DiagonalStraightDirection(1))),
     QUEEN(new SameMovementPolicy(new DiagonalStraightDirection(8))),
     BISHOP(new SameMovementPolicy(new DiagonalDirection(8))),

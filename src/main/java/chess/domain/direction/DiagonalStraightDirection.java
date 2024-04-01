@@ -4,6 +4,7 @@ import chess.domain.position.Obstacle;
 import chess.domain.position.Position;
 
 public class DiagonalStraightDirection implements Direction {
+
     private final CombinationDirection combinationDirection;
 
     public DiagonalStraightDirection(final int moveCount) {

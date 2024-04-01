@@ -12,6 +12,7 @@ import chess.view.input.command.MovePath;
 import chess.view.output.OutputView;
 
 public class PlayingGame implements GameStatus {
+    
     private final Board board;
     private final Color color;
 

@@ -3,6 +3,7 @@ package chess.domain.position;
 import java.util.List;
 
 public class Obstacle {
+    
     private final List<Position> obstacles;
 
     public Obstacle(final List<Position> obstacles) {
