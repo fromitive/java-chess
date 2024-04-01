@@ -21,11 +21,7 @@ public class EndGame implements GameStatus {
     @Override
     public GameStatus play(final InputView inputView, final OutputView outputView, final ChessService chessService) {
         outputView.printWinnerColor(board.getAloneKingColor());
-        initializeBoard(chessService);
-        return new TerminateGame();
-    }
-
-    private void initializeBoard(final ChessService chessService) {
         chessService.initializeChess();
+        return new TerminateGame();
     }
 }
