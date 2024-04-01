@@ -2,6 +2,7 @@ package chess.domain.piece;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,7 +11,10 @@ class ColorTest {
     @Test
     @DisplayName("현재 가지고 있는 보색을 반환할 수 있다.")
     void Given_ColorWithWhite_When_Opposite_Then_ReturnColorBlack() {
-        assertThat(Color.WHITE.opposite()).isEqualTo(Color.BLACK);
+        assertAll(
+                () -> assertThat(Color.WHITE.opposite()).isEqualTo(Color.BLACK),
+                () -> assertThat(Color.BLACK.opposite()).isEqualTo(Color.WHITE)
+        );
     }
 
     @Test
